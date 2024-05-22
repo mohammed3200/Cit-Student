@@ -1,5 +1,5 @@
 import { View, Animated, FlatList } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Images } from '@/constants';
 import { StatusBar } from 'expo-status-bar';
 import { OnboardingItem, Paginator, NextButton } from '@/components';
@@ -44,13 +44,16 @@ const Onboarding: React.FC<OnboardingProp> = () => {
   const scrollTo = () => {
     if (currentIndex < slides.length - 1) {
       slidesRef.current?.scrollToIndex({ index: currentIndex + 1 })
-    } if (currentIndex === slides.length - 2) {
-      setLast(true);
     } else {
       // navigation.navigate('Login')
-      console.log('Last Item');   
+      console.log('Last Item');
     }
   }
+  useEffect(() => {
+    if (currentIndex === slides.length - 1) setLast(true)
+    else setLast(false);
+  }, [currentIndex]);
+
   return (
     <View className='flex-1 justify-center items-center'>
       <View style={{ flex: 3 }}>
