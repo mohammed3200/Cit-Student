@@ -89,7 +89,7 @@ const Onboarding: React.FC<OnboardingProp> = () => {
         <View className='absolute -top-48 right-10 left-12'>
           <Paginator data={slides} scrollX={scrollX} />
         </View>
-        <View className='mt-20'>
+        <View className='mt-20 items-center'>
           <NextButton
             label={last ? "هيا بنا نبدء" : "التالي"}
             variant={last ? "primary" : "default"}
@@ -97,7 +97,7 @@ const Onboarding: React.FC<OnboardingProp> = () => {
           />
         </View>
       </View>
-      <StatusBar style='light' backgroundColor='#222' />
+      <StatusBar style='dark' backgroundColor='#F0F0F5' />
     </View>
   )
 }
