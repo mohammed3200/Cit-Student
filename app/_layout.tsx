@@ -5,10 +5,11 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
- const InitialLayout = () => {
+const InitialLayout = () => {
   const [fontsLoaded, error] = useFonts({
     "DINNextLT-Bold": require("../assets/fonts/DINNextLTArabic-Bold-4.ttf"),
     "DINNextLT-Regular": require("../assets/fonts/DINNextLTArabic-Regular-4.ttf"),
@@ -33,9 +34,9 @@ SplashScreen.preventAutoHideAsync();
 }
 const RootLayoutNav = () => {
   return (
-    <AuthProvider>
-      <InitialLayout />
-    </AuthProvider>
+      <AuthProvider>
+        <InitialLayout />
+      </AuthProvider>
   );
 }
 export default RootLayoutNav;

@@ -21,9 +21,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      DNNestLTB: ["DINNextLT-Bold", "sans-serif"],
-      DNNestLT: ["DINNextLT-Regular", "sans-serif"],
-      DNNestLTL: ["DINNextLT-Light", "sans-serif"],
+      DNNextLTB: ["DINNextLT-Bold", "sans-serif"],
+      DNNextLT: ["DINNextLT-Regular", "sans-serif"],
+      DNNextLTL: ["DINNextLT-Light", "sans-serif"],
     },
   },
   plugins: [],

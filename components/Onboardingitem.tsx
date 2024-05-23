@@ -20,8 +20,8 @@ const OnboardingItem: React.FC<OnboardingItemProp> = ({ item }) => {
                 className='justify-center py-10'
             />
             <View style={{ flex: .3 }}>
-                <Text className='font-DNNestLTB text-lg mb-3 text-center text-slate-900'>{item.title}</Text>
-                <Text className='font-DNNestLT text-sm text-slate-800 text-center px-16'>{item.description}</Text>
+                <Text className='font-DNNextLTB text-lg mb-3 text-center text-slate-900'>{item.title}</Text>
+                <Text className='font-DNNextLT text-sm text-slate-800 text-center px-16'>{item.description}</Text>
             </View>
         </View>
     );

@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Images } from '@/constants';
 import { StatusBar } from 'expo-status-bar';
 import { OnboardingItem, Paginator, NextButton } from '@/components';
+import { useRouter } from 'expo-router';
+
 
 
 
@@ -31,6 +33,7 @@ const slides = [
   },
 ]
 const Onboarding: React.FC<OnboardingProp> = () => {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [last, setLast] = useState(false);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -46,7 +49,7 @@ const Onboarding: React.FC<OnboardingProp> = () => {
       slidesRef.current?.scrollToIndex({ index: currentIndex + 1 })
     } else {
       // navigation.navigate('Login')
-      console.log('Last Item');
+      router.replace('Welcome')
     }
   }
   useEffect(() => {
@@ -83,7 +86,7 @@ const Onboarding: React.FC<OnboardingProp> = () => {
         />
       </View>
       <View className='flex-1 flex-col'>
-        <View className='absolute -top-48 right-9 left-12'>
+        <View className='absolute -top-48 right-10 left-12'>
           <Paginator data={slides} scrollX={scrollX} />
         </View>
         <View className='mt-20'>
