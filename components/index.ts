@@ -3,4 +3,16 @@ import OnboardingItem from "./Onboardingitem";
 import Paginator from "./Paginator";
 import NextButton from "./NextButton";
 import CustomButton from "./CustomButton";
-export { TabIcon, OnboardingItem, Paginator, NextButton, CustomButton };
+import Container from "./Container";
+import SocialLogin from "./SocialLogin";
+import TextInput from "./Form";
+export {
+  TabIcon,
+  OnboardingItem,
+  Paginator,
+  NextButton,
+  CustomButton,
+  Container,
+  SocialLogin,
+  TextInput,
+};

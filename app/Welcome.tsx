@@ -3,8 +3,9 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Images } from "@/constants";
 import { Image } from "expo-image";
-import { CustomButton, NextButton } from "@/components";
+import { CustomButton } from "@/components";
 import { StatusBar } from "expo-status-bar";
+import { Redirect, router } from "expo-router";
 
 interface WelcomeProps {}
 
@@ -12,11 +13,11 @@ const Welcome: React.FC<WelcomeProps> = () => {
   return (
     <SafeAreaView className="bg-primary h-full ">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-        <View className="w-full justify-center items-center h-full px-4 ">
+        <View className="w-full justify-center items-center min-h-[85vh] px-4">
           <Image
             source={Images.logo}
-            className="w-24 h-24 rounded-2xl"
-            contentFit="contain"
+            className="w-24 h-24 rounded-full my-4"
+            contentFit="cover"
           />
           <Image
             source={Images.undraw_welcoming}
@@ -41,19 +42,21 @@ const Welcome: React.FC<WelcomeProps> = () => {
           <Text className="text-sm font-DNNextLT text-gray-700 mt-7 text-center">
             أهلا بكم في تطبيقنا الذي سيجعل رحلتكم الدراسية أسهل وأكثر إنتاجية!
           </Text>
-          <View className="flex-1 flex-col gap-4">
-            <CustomButton
-              variant="primary"
-              title="تسجيل الدخول"
-              onPress={() => {}}
-              containerStyle="w-full mt-7"
-            />
-            <CustomButton
-              title="تسجيل الدخول عبر رمز الاستجابة السريعة "
-              onPress={() => {}}
-              containerStyle="w-full mt-7"
-            />
-          </View>
+          <CustomButton
+            variant="primary"
+            title="تسجيل الدخول"
+            onPress={() => {
+                router.replace('/(auth)/sign-in')
+            }}
+            containerStyle="w-full mt-7"
+          />
+          <CustomButton
+            title="تسجيل الدخول عبر رمز الاستجابة السريعة "
+            onPress={() => {
+                router.replace('/(auth)/sign-in-Qr-code')
+            }}
+            containerStyle="w-full mt-3 mb-4"
+          />
         </View>
       </ScrollView>
       <StatusBar style="dark" backgroundColor="#F0F0F5" />

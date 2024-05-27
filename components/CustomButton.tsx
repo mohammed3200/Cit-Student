@@ -24,9 +24,9 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onPress={onPress}
       activeOpacity={0.7}
       className={` 
-            bg-secondary-100 rounded-full min-h-[62px] 
-            justify-center items-center w-full
-            ${containerStyle && containerStyle}
+      bg-secondary-100 rounded-full min-h-[62px] 
+      justify-center items-center
+      ${containerStyle && containerStyle}
             ${isLoading && "opacity-50"}
             `}
       disabled={isLoading}

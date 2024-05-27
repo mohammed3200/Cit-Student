@@ -32,6 +32,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "3f44e952-d859-4738-8c9c-d2c9a047abb5"
+      }
+    },
+    "owner": "cit2024"
   }
 }

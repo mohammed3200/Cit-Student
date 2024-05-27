@@ -2,18 +2,24 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 
 interface NextButtonProp {
-  label: string;
-  variant?: "default" | "primary";
+  label?: string;
+  variant?: "default" | "primary" | "transparent";
   onPress: () => void;
+  children?: React.ReactNode;
 }
 
 const NextButton: React.FC<NextButtonProp> = ({
   label,
   variant = "default",
   onPress,
+  children,
 }) => {
   const backgroundColor =
-    variant === "primary" ? "#FF6600" : "rgba(12, 13, 52, 0.05)";
+    variant === "primary"
+      ? "#FF6600"
+      : variant === "transparent"
+      ? "transparent"
+      : "rgba(12, 13, 52, 0.05)";
 
   return (
     <TouchableOpacity
@@ -23,13 +29,17 @@ const NextButton: React.FC<NextButtonProp> = ({
       activeOpacity={0.7}
     >
       <View>
-        <Text
-          className={`font-DNNestLT text-base text-center
+        {children ? (
+          children
+        ) : (
+          <Text
+            className={`font-DNNestLT text-base text-center
                     ${variant === "primary" ? "text-white" : "text-[#0C0D34]"}
                     `}
-        >
-          {label}
-        </Text>
+          >
+            {label}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
