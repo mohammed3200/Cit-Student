@@ -8,9 +8,12 @@ import { Container, CustomButton, Footer, TextInput } from "@/components";
 import { router } from "expo-router";
 import { useAuth } from "@/context";
 import { usePushNotifications } from "@/hooks";
+import { StatusBar } from "expo-status-bar";
 
 const SignIn = () => {
-  const [RegistrationNumber, setRegistrationNumber] = React.useState<string | null>(null);
+  const [RegistrationNumber, setRegistrationNumber] = React.useState<
+    string | null
+  >(null);
   const [Password, setPassword] = React.useState<string | null>(null);
 
   const RegistrationNumberValidator = (RegistrationNumber: string): boolean => {
@@ -46,7 +49,11 @@ const SignIn = () => {
   const onSubmit = async () => {
     if (RegistrationNumber && Password) {
       try {
-        const result = await onLogin!(RegistrationNumber, Password, expoPushToken?.data);
+        const result = await onLogin!(
+          RegistrationNumber,
+          Password,
+          expoPushToken?.data
+        );
         console.log(result);
         if (result && result.message) {
           alert(result.message);
@@ -66,13 +73,14 @@ const SignIn = () => {
 
   return (
     <SafeAreaProvider>
+      <StatusBar style="light" />
       <KeyboardAwareScrollView
         style={{ flex: 1 }}
         resetScrollToCoords={{ x: 0, y: 0 }}
         contentContainerStyle={{ flexGrow: 1 }}
         scrollEnabled={true}
       >
-        <Container {...{ footer }}>
+        <Container pattern={0} {...{ footer }}>
           <View className="px-8 py-4 items-center">
             <Image
               source={Images.logo}
