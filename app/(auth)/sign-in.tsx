@@ -1,90 +1,69 @@
-import { View, Text} from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Image } from "expo-image";
-import { StatusBar } from "expo-status-bar";
 import { Images, icons } from "@/constants";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import {
-  Container,
-  CustomButton,
-  NextButton,
-  SocialLogin,
-  TextInput,
-} from "@/components";
+import { Container, CustomButton, Footer, TextInput } from "@/components";
 import { router } from "expo-router";
+import { useAuth } from "@/context";
+import { usePushNotifications } from "@/hooks";
 
 const SignIn = () => {
-  const [RegistrationNumber, setRegistrationNumber] =
-    React.useState<boolean>(false);
-  const [Password, setPassword] = React.useState<boolean>(false);
+  const [RegistrationNumber, setRegistrationNumber] = React.useState<string | null>(null);
+  const [Password, setPassword] = React.useState<string | null>(null);
+
   const RegistrationNumberValidator = (RegistrationNumber: string): boolean => {
-    // 1. Ensure the value is not null
     if (!RegistrationNumber) {
-      setRegistrationNumber(false);
+      setRegistrationNumber(null);
       return false;
     }
-
-    // 2. Ensure the value does not contain special characters
-    const specialCharactersRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    const specialCharactersRegex = /[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     if (specialCharactersRegex.test(RegistrationNumber)) {
-      setRegistrationNumber(false);
+      setRegistrationNumber(null);
       return false;
     }
-
-    // If both checks pass, return true
-    setRegistrationNumber(true);
+    setRegistrationNumber(RegistrationNumber);
     return true;
   };
+
   const passwordValid = (Password: string): boolean => {
-    // Ensure the value is not null
     if (!Password) {
-      setPassword(false);
+      setPassword(null);
       return false;
     }
-    if(Password.length < 6) {
-      setPassword(false);
+    if (Password.length < 6) {
+      setPassword(null);
       return false;
     }
-    setPassword(true);
+    setPassword(Password);
     return true;
+  };
+
+  const { onLogin } = useAuth();
+  const { expoPushToken } = usePushNotifications();
+
+  const onSubmit = async () => {
+    if (RegistrationNumber && Password) {
+      try {
+        const result = await onLogin!(RegistrationNumber, Password, expoPushToken?.data);
+        console.log(result);
+        if (result && result.message) {
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
   const footer = (
-    <>
-      <SocialLogin />
-      <View className="items-center">
-        <NextButton
-          variant="transparent"
-          onPress={() => {
-            router.replace("/sign-in-Qr-code");
-          }}
-        >
-          <View
-            className="
-        flex-row-reverse 
-        justify-center"
-          >
-            <Text
-              className="
-          text-primary 
-          font-DNNextLT"
-            >
-              نسيت كلمة المرور التسجيل عبر{" "}
-            </Text>
-            <Text>
-              <Text
-                className="text-secondary-100
-             font-DNNextLT
-              "
-              >
-                QrCode رمز
-              </Text>
-            </Text>
-          </View>
-        </NextButton>
-      </View>
-    </>
+    <Footer
+      title="نسيت كلمة المرور التسجيل عبر"
+      onPress={() => router.replace("/sign-in-Qr-code")}
+      action="QrCode رمز"
+    />
   );
+
   return (
     <SafeAreaProvider>
       <KeyboardAwareScrollView
@@ -111,6 +90,10 @@ const SignIn = () => {
                 icon={icons.hash}
                 placeholder="ادخل رقم القيد الخاص بك"
                 validator={RegistrationNumberValidator}
+                autoCapitalize="none"
+                autoComplete={"cc-number"}
+                returnKeyType={"next"}
+                returnKeyLabel={"next"}
               />
             </View>
             <TextInput
@@ -118,10 +101,14 @@ const SignIn = () => {
               placeholder="ادخل كلمة المرور"
               validator={passwordValid}
               isPassword={true}
+              autoCapitalize="none"
+              autoComplete={"password"}
+              returnKeyLabel={"go"}
+              returnKeyType={"go"}
             />
             <CustomButton
               title="سجل الدخول"
-              onPress={() => {}}
+              onPress={onSubmit}
               variant={RegistrationNumber && Password ? "primary" : "default"}
               isLoading={!(RegistrationNumber && Password)}
               containerStyle="w-full mt-8"

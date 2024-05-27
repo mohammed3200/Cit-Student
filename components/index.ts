@@ -6,6 +6,7 @@ import CustomButton from "./CustomButton";
 import Container from "./Container";
 import SocialLogin from "./SocialLogin";
 import TextInput from "./Form";
+import Footer from "./Footer";
 export {
   TabIcon,
   OnboardingItem,
@@ -15,4 +16,5 @@ export {
   Container,
   SocialLogin,
   TextInput,
+  Footer,
 };
