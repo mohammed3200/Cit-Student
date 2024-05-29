@@ -22,4 +22,6 @@ export default {
 
   check: require("@/assets/icons/check-circle.png"),
   cross: require("@/assets/icons/cross-circle.png"),
+
+  rotate: require("@/assets/icons/rotate-right.png"),
 };

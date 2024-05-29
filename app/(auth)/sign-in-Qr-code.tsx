@@ -1,19 +1,65 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Container, CustomButton, Footer } from "@/components";
+import {
+  Container,
+  CustomButton,
+  CloseButton,
+  QrCodeScanner,
+} from "@/components";
 import { Image } from "expo-image";
 import { Images } from "@/constants";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useAuth } from "@/context";
+import { usePushNotifications } from "@/hooks";
 
 const SigInQrCode = () => {
+  const { onLoginByQrCode } = useAuth();
+  const { expoPushToken } = usePushNotifications();
+  const [qrCode, setQrCode] = useState<string | null>("");
+
+  const QrCodeStringValidator = (QrCodeString: string): boolean => {
+    if (!QrCodeString) {
+      setQrCode(null);
+      return false;
+    }
+    const specialCharactersRegex = /[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if (specialCharactersRegex.test(QrCodeString)) {
+      setQrCode(null);
+      return false;
+    }
+    if (QrCodeString.length < 15) {
+      setQrCode(null);
+      return false;
+    }
+    setQrCode(QrCodeString);
+    console.log("signin",QrCodeString);
+    return true;
+  };
+  const onSubmit = async () => {
+    if (qrCode) {
+      try {
+        const result = await onLoginByQrCode!(qrCode, expoPushToken?.data);
+        console.log(result);
+        router.replace("/(tabs)/time-table");
+        if (result && result.message) {
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   const footer = (
-    <Footer
-      title="تسجيل الدخول باستخدام"
-      onPress={() => router.replace("/sign-in")}
-      action="رقم القيد و كلمة السر"
-    />
+    <View className="flex-row justify-center py-3">
+      <CloseButton
+        onPress={() => {
+          router.replace("/sign-in");
+        }}
+      />
+    </View>
   );
 
   return (
@@ -29,18 +75,20 @@ const SigInQrCode = () => {
           <Text className="text-black-100 font-DNNextLTB text-xl">
             مرحبا بعودتك
           </Text>
-          <Text className="text-black-200 font-DNNextLT text-sm mt-2 mb-10 text-center">
+          <Text className="text-black-200 font-DNNextLT text-sm mt-2 mb-8 text-center">
             ضع كاميرا الهاتف علي رمز الاستجابة السريعة QR code الموجود علي
             بطاقتك الجامعية للوصل لبياناتك
           </Text>
-
+          <QrCodeScanner 
+          validator={QrCodeStringValidator}
+          onValidQrCode={setQrCode}
+          />
           <CustomButton
             title="سجل الدخول"
-            // onPress={onSubmit}
-            // variant={RegistrationNumber && Password ? "primary" : "default"}
-            // isLoading={!(RegistrationNumber && Password)}
-            containerStyle="w-full mt-8"
-            onPress={() => {}}
+            variant={qrCode ? "primary" : "default"}
+            isLoading={!qrCode}
+            containerStyle="w-full mt-4"
+            onPress={onSubmit}
           />
         </View>
       </Container>

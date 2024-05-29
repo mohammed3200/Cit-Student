@@ -17,7 +17,7 @@ const Page = () => {
             className='w-36 h-36 rounded-2xl'
             contentFit='contain'
           />
-          <Link href='/(auth)/sign-in'><Text>Go Onboarding</Text></Link>
+          <Link href='/Onboarding'><Text>Go Onboarding</Text></Link>
         </View>
       </ScrollView>
     </SafeAreaView>

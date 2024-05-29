@@ -7,6 +7,8 @@ import Container from "./Container";
 import SocialLogin from "./SocialLogin";
 import TextInput from "./Form";
 import Footer from "./Footer";
+import CloseButton from "./CloseButton";
+import QrCodeScanner from "./QrCode";
 export {
   TabIcon,
   OnboardingItem,
@@ -17,4 +19,6 @@ export {
   SocialLogin,
   TextInput,
   Footer,
+  CloseButton,
+  QrCodeScanner,
 };

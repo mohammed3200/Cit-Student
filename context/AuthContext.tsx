@@ -9,7 +9,7 @@ interface AuthProps {
     password: string,
     pushToken?: string
   ) => Promise<any>;
-  loginByQrCode?: (QrCode: string, pushToken?: string) => Promise<any>;
+  onLoginByQrCode?: (QrCode: string, pushToken?: string) => Promise<any>; 
   onLogout?: () => Promise<any>;
 }
 
@@ -80,30 +80,31 @@ export const AuthProvider = ({ children }: any) => {
         QrCode: QrCode,
         pushToken: pushToken,
       });
-
+  
       console.log(
         "🔒 ~ file: AuthContext.tsx:78 ~ loginByQrCode ~ result:",
         result
       );
-
+  
       setAuthState({
         token: result.data.data.access_token,
         authenticated: true,
       });
-
+  
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${result.data.data.access_token}`;
-
+  
       await SecureStore.setItemAsync(TOKEN_KEY, result.data.data.access_token);
-
+  
       return result;
     } catch (err) {
       console.log({ error: true, msg: err });
-
+  
       return { error: true, msg: (err as any).response?.data.statusCode };
     }
   };
+  
   const logout = async () => {
     // Remove token from local storage and headers
     await SecureStore.deleteItemAsync(TOKEN_KEY);
@@ -121,7 +122,7 @@ export const AuthProvider = ({ children }: any) => {
   const value = {
     onLogin: login,
     onLogout: logout,
-    onLoginByQrCode:loginByQrCode,
+    onLoginByQrCode: loginByQrCode,
     authState,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
