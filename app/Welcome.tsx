@@ -16,7 +16,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
         <View className="w-full justify-center items-center min-h-[85vh] px-4">
           <Image
             source={Images.logo}
-            className="w-24 h-24 rounded-full my-4"
+            className="w-28 h-28 rounded-full my-4"
             contentFit="cover"
           />
           <Image
@@ -39,7 +39,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
               CIT Student
             </Text>
           </View>
-          <Text className="text-sm font-DNNextLT text-gray-700 mt-7 text-center">
+          <Text className="text-sm font-DNNextLTB text-gray-700 mt-5 text-center">
             أهلا بكم في تطبيقنا الذي سيجعل رحلتكم الدراسية أسهل وأكثر إنتاجية!
           </Text>
           <CustomButton
@@ -55,7 +55,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
             onPress={() => {
                 router.replace('/(auth)/sign-in-Qr-code')
             }}
-            containerStyle="w-full mt-3 mb-4"
+            containerStyle="w-full mt-3 mb-5"
           />
         </View>
       </ScrollView>

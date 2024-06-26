@@ -14,7 +14,7 @@ interface AuthProps {
 }
 
 const TOKEN_KEY = "my-jwt";
-export const API_URL = process.env["URL_API"];
+export const API_URL = "http://results.justhost.ly";
 const AuthContext = createContext<AuthProps>({});
 
 export const useAuth = () => {

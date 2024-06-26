@@ -33,7 +33,7 @@ const NextButton: React.FC<NextButtonProp> = ({
           children
         ) : (
           <Text
-            className={`font-DNNestLT text-base text-center
+            className={`font-DNNextLT text-base text-center
                     ${variant === "primary" ? "text-white" : "text-[#0C0D34]"}
                     `}
           >
