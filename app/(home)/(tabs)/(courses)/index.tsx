@@ -3,7 +3,7 @@ import React from 'react'
 
 const Courses = () => {
   return (
-    <View className='w-full h-full flex-1 justify-center items-center bg-slate-500'>
+    <View className='w-full h-full flex-1 justify-center items-center'>
       <Text>courses</Text>
     </View>
   )

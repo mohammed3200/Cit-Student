@@ -9,6 +9,8 @@ import TextInput from "./Form";
 import Footer from "./Footer";
 import CloseButton from "./CloseButton";
 import QrCodeScanner from "./QrCode";
+import { StrokeAnimation } from "./StrokeAnimation";
+import AnimatedStroke from "./AnimatedStroke";
 export {
   TabIcon,
   OnboardingItem,
@@ -21,4 +23,6 @@ export {
   Footer,
   CloseButton,
   QrCodeScanner,
+  StrokeAnimation,
+  AnimatedStroke,
 };
