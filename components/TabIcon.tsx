@@ -20,7 +20,7 @@ const TabIcon = ({ ActiveIcon,InactiveIcon, color, name, focused }: TabIconProp)
                 className='w-6 h-6'
             />
             {focused &&
-                <Text className='font-DNNestLT  text-xs' style={{color}}>
+                <Text className='font-DNNextLT  text-xs' style={{color}}>
                     {name}
                 </Text>
                 }

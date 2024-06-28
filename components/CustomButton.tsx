@@ -19,25 +19,25 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   variant = "default",
 }) => {
   const backgroundColor =
-    variant === "primary" ? "#FF6600" : "rgba(12, 13, 52, 0.05)";
+  variant === "primary" && !isLoading ? "#FF6600" :  "rgba(12, 13, 52, 0.05)";
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.5}
       className={` 
       bg-secondary-100 rounded-full min-h-[62px] 
-      justify-center items-center
+      justify-center items-center flex-row
       ${containerStyle && containerStyle}
             
             `}
-      disabled={!isLoading}
+      disabled={isLoading}
       style={{
-        backgroundColor: !isLoading ? "rgba(12, 13, 52, 0.05)" : backgroundColor,
+        backgroundColor
       }}
     >
       {!isLoading && (
         <View className="mr-8">
-          <Chase size={24} color="#333333" />
+          <Chase size={36} color="#333333" />
         </View>
       )}
       <Text

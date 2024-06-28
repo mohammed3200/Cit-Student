@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { Images, icons } from "@/constants";
@@ -11,24 +11,30 @@ import { usePushNotifications } from "@/hooks";
 import { StatusBar } from "expo-status-bar";
 
 const SignIn = () => {
+  const [isLoading,setIsLoading] = useState<boolean>(false)
   const [RegistrationNumber, setRegistrationNumber] = React.useState<
     string | null
   >(null);
+  const [isRegistrationNumber, setIsRegistrationNumber] = useState<boolean>(false);
+  const [isPassword,setIsPassword] = useState<boolean>(false)
   const [Password, setPassword] = React.useState<string | null>(null);
 
   const RegistrationNumberValidator = (RegistrationNumber: string): boolean => {
     if (!RegistrationNumber) {
       setRegistrationNumber(null);
+      setIsRegistrationNumber(false);
       return false;
     }
     const specialCharactersRegex = /[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     if (specialCharactersRegex.test(RegistrationNumber)) {
       setRegistrationNumber(null);
+      setIsRegistrationNumber(false);
       return false;
     }
 
     if (RegistrationNumber.length > 9) {
       setRegistrationNumber(null);
+      setIsRegistrationNumber(false);
       return false;
     }
 
@@ -39,22 +45,28 @@ const SignIn = () => {
   const passwordValid = (Password: string): boolean => {
     if (!Password) {
       setPassword(null);
+      setIsPassword(false);
       return false;
     }
     if (Password.length < 6) {
       setPassword(null);
+      setIsPassword(false);
       return false;
     }
     setPassword(Password);
     return true;
   };
 
+  useEffect(()=>{
+    setIsLoading(isPassword && isRegistrationNumber);
+  },[RegistrationNumber,Password])
   const { onLogin } = useAuth();
   const { expoPushToken } = usePushNotifications();
 
   const onSubmit = async () => {
     if (RegistrationNumber && Password) {
       try {
+        setIsLoading(isPassword && isRegistrationNumber);
         const result = await onLogin!(
           RegistrationNumber,
           Password,
@@ -123,9 +135,9 @@ const SignIn = () => {
             <CustomButton
               title="سجل الدخول"
               onPress={onSubmit}
-              variant={RegistrationNumber && Password ? "primary" : "default"}
-              isLoading={!(RegistrationNumber && Password)}
-              containerStyle="w-full mt-8 flex-row"
+              variant={(RegistrationNumber && Password) ? "primary" : "default"}
+              isLoading={isLoading}
+              containerStyle="w-full mt-8"
             />
           </View>
         </Container>
