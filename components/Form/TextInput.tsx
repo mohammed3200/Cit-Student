@@ -71,7 +71,7 @@ const TextInput: React.FC<TextInputProps> = ({ icon,isPassword, validator, ...pr
       {(state === Valid || state === Invalid) && (
         <View className="w-5 h-5 rounded-full justify-center items-center">
           <Image
-            source={state === Valid ? icons.check : icons.cross}
+            source={state === Valid ? icons.check : icons.crossCircle}
             className="bg-primary h-4 w-4"
             tintColor={state === Valid ? "#26b1a4" : "#f70e0d"}
           />

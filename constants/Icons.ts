@@ -21,7 +21,9 @@ export default {
   lock: require("@/assets/icons/lock.png"),
 
   check: require("@/assets/icons/check-circle.png"),
-  cross: require("@/assets/icons/cross-circle.png"),
+  crossCircle: require("@/assets/icons/cross-circle.png"),
 
   rotate: require("@/assets/icons/rotate-right.png"),
+
+  cross: require("@/assets/icons/cross.png")
 };
