@@ -52,7 +52,7 @@ export default function TabLayout() {
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
               ActiveIcon={icons.bell}
-              InactiveIcon={icons.tableListOutline}
+              InactiveIcon={icons.bellOutline}
                 color={color}
                 focused={focused}
                 name='الاعلانات'

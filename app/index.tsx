@@ -1,7 +1,7 @@
 import { View, Text, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import { router } from "expo-router";
+import { router,Link } from "expo-router";
 import { Images } from "@/constants";
 import { Image } from "expo-image";
 import { useAuth } from "@/context";
@@ -9,13 +9,13 @@ import { useAuth } from "@/context";
 import { StrokeAnimation } from "@/components";
 
 const Page = () => {
-  const {authState} = useAuth();
-  useEffect(()=>{
-    if(!authState?.token) router.replace("./Onboarding");
-    if(authState?.token && !authState.authenticated) router.replace("./(auth)/sign-in");
-    if(authState?.token && authState.token) router.replace("./(home)/(tabs)/")
+  // const {authState} = useAuth();
+  // useEffect(()=>{
+  //   if(!authState?.token) router.replace("/Onboarding");
+  //   if(authState?.token && !authState.authenticated) router.replace("/(auth)/sign-in");
+  //   if(authState?.token && authState.token) router.replace("/(home)/(Drawer)")
 
-  },[])
+  // },[])
   return (
     <>
     <StatusBar
@@ -31,12 +31,12 @@ const Page = () => {
           className="w-36 h-36 rounded-2xl"
           contentFit="contain"
         />
-        <View className="mt-24 block">
+        {/* <View className="mt-24 block">
           <StrokeAnimation />
-        </View>
-        {/* <Link href="/Onboarding">
+        </View> */}
+        <Link href="/Onboarding">
             <Text>Go Onboarding</Text>
-          </Link> */}
+          </Link>
       </View>
     </>
   );

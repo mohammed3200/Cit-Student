@@ -26,6 +26,12 @@ const SignIn = () => {
       setRegistrationNumber(null);
       return false;
     }
+
+    if (RegistrationNumber.length > 9) {
+      setRegistrationNumber(null);
+      return false;
+    }
+
     setRegistrationNumber(RegistrationNumber);
     return true;
   };
@@ -119,7 +125,7 @@ const SignIn = () => {
               onPress={onSubmit}
               variant={RegistrationNumber && Password ? "primary" : "default"}
               isLoading={!(RegistrationNumber && Password)}
-              containerStyle="w-full mt-8"
+              containerStyle="w-full mt-8 flex-row"
             />
           </View>
         </Container>
