@@ -69,7 +69,7 @@ export default function TabLayout() {
               InactiveIcon={icons.featuresOutline}
                 color={color}
                 focused={focused}
-                name='المقرارت المنجز'
+                name='المقررات المنجز'
               />
             )
           }}

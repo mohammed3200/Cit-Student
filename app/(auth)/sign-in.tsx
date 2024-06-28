@@ -66,7 +66,7 @@ const SignIn = () => {
   const onSubmit = async () => {
     if (RegistrationNumber && Password) {
       try {
-        setIsLoading(isPassword && isRegistrationNumber);
+        setIsLoading(true);
         const result = await onLogin!(
           RegistrationNumber,
           Password,

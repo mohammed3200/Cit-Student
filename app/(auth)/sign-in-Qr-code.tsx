@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   Container,
@@ -18,28 +18,38 @@ const SigInQrCode = () => {
   const { onLoginByQrCode } = useAuth();
   const { expoPushToken } = usePushNotifications();
   const [qrCode, setQrCode] = useState<string | null>("");
+  const [isQrCode,setIsQrCode] = useState<boolean>(false);
+  const [isLoading,setIsLoading] = useState<boolean>(false);
 
   const QrCodeStringValidator = (QrCodeString: string): boolean => {
     if (!QrCodeString) {
       setQrCode(null);
+      setIsQrCode(false);
       return false;
     }
     const specialCharactersRegex = /[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
     if (specialCharactersRegex.test(QrCodeString)) {
       setQrCode(null);
+      setIsQrCode(false);
       return false;
     }
     if (QrCodeString.length < 15) {
       setQrCode(null);
+      setIsQrCode(false);
       return false;
     }
     setQrCode(QrCodeString);
     console.log("signin",QrCodeString);
     return true;
   };
+
+  useEffect(()=>{
+    setIsLoading(isQrCode);
+  },[qrCode])
   const onSubmit = async () => {
     if (qrCode) {
       try {
+        setIsLoading(true);
         const result = await onLoginByQrCode!(qrCode, expoPushToken?.data);
         console.log(result);
         router.replace("(home)/(tabs)/time-table");
@@ -86,7 +96,7 @@ const SigInQrCode = () => {
           <CustomButton
             title="سجل الدخول"
             variant={qrCode ? "primary" : "default"}
-            isLoading={!qrCode}
+            isLoading={isLoading}
             containerStyle="w-full mt-4"
             onPress={onSubmit}
           />

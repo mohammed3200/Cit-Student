@@ -35,8 +35,8 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         backgroundColor
       }}
     >
-      {!isLoading && (
-        <View className="mr-8">
+      {isLoading && (
+        <View className="absolute self-center justify-self-center right-5">
           <Chase size={36} color="#333333" />
         </View>
       )}
