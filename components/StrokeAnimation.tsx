@@ -4,7 +4,6 @@ import Svg from "react-native-svg";
 
 import AnimatedStroke from "./AnimatedStroke";
 import { Easing, useSharedValue, withTiming } from "react-native-reanimated";
-import AnimatedLogo from "./AnimatedLogo";
 
 const MARGIN = 10;
 const vWidth = 775 + MARGIN;
@@ -31,7 +30,6 @@ export const StrokeAnimation = () => {
         className="flex-1 justify-center items-center"
          style={StyleSheet.absoluteFillObject}
         >
-          <AnimatedLogo progress={progress}/>
         </View>
         <Svg
           width={width}
