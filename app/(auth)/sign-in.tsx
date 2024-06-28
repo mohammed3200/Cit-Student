@@ -54,7 +54,7 @@ const SignIn = () => {
           Password,
           expoPushToken?.data
         );
-        router.replace("/(tabs)/time-table");
+        router.replace("(home)/(tabs)/time-table");
         if (result && result.message) {
           alert(result.message);
         }

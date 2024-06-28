@@ -42,7 +42,7 @@ const SigInQrCode = () => {
       try {
         const result = await onLoginByQrCode!(qrCode, expoPushToken?.data);
         console.log(result);
-        router.replace("/(tabs)/time-table");
+        router.replace("(home)/(tabs)/time-table");
         if (result && result.message) {
           alert(result.message);
         }

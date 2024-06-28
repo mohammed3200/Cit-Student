@@ -27,22 +27,22 @@ const AnimatedStroke: React.FC<AnimatedStrokeProps> = ({ d, progress }) => {
   return (
     <>
     <AnimatedPath
-        animatedProps={bgStrokeAnimation}
+        animatedProps={strokeAnimation}
         d={d}
         stroke={stroke}
         strokeWidth={10}
-        fill={"#F5f5F5"}
+        fill={"#F0F0F5"}
         strokeDasharray={length}
       />
       
     <AnimatedPath
-        animatedProps={strokeAnimation}
+        animatedProps={bgStrokeAnimation}
         onLayout={() => setLength(ref.current?.getTotalLength() || 0)}
         ref={ref}
         d={d}
-        stroke="black"
+        stroke={stroke}
         strokeWidth={10}
-        fill={"#F5f5F5"}
+        fill={"#F0F0F5"}
         strokeDasharray={length}
       />
       

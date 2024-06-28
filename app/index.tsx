@@ -1,32 +1,44 @@
 import { View, Text, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { Link } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useEffect } from "react";
+import { router } from "expo-router";
 import { Images } from "@/constants";
 import { Image } from "expo-image";
+import { useAuth } from "@/context";
+
 import { StrokeAnimation } from "@/components";
 
 const Page = () => {
+  const {authState} = useAuth();
+  useEffect(()=>{
+    if(!authState?.token) router.replace("./Onboarding");
+    if(authState?.token && !authState.authenticated) router.replace("./(auth)/sign-in");
+    if(authState?.token && authState.token) router.replace("./(home)/(tabs)/")
+
+  },[])
   return (
-    <SafeAreaView className="bg-primary h-full">
-      {/* <ScrollView contentContainerStyle={{ height: "100%" }}> */}
-        <View
-          className="w-full justify-center 
-        items-center h-full px-4"
-        >
-          {/* <Image
-            source={Images.logo}
-            className="w-36 h-36 rounded-2xl"
-            contentFit="contain"
-          /> */}
+    <>
+    <StatusBar
+    style="light"
+    backgroundColor="#F0F0F5"
+    />
+      <View
+        className="flex-1 w-full justify-center 
+        items-center h-full"
+      >
+        <Image
+          source={Images.logo}
+          className="w-36 h-36 rounded-2xl"
+          contentFit="contain"
+        />
+        <View className="mt-24 block">
           <StrokeAnimation />
-          {/* <Link href="/Onboarding">
+        </View>
+        {/* <Link href="/Onboarding">
             <Text>Go Onboarding</Text>
           </Link> */}
-        </View>
-      {/* </ScrollView> */}
-    </SafeAreaView>
+      </View>
+    </>
   );
 };
 

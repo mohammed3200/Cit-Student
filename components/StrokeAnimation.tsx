@@ -22,15 +22,9 @@ export const StrokeAnimation = () => {
   return (
     <>
       <View
-        className="flex-1 justify-center items-center"
+        className="flex-1 items-center justify-center"
         style={StyleSheet.absoluteFillObject}
       >
-        {/* <Background /> */}
-        <View
-        className="flex-1 justify-center items-center"
-         style={StyleSheet.absoluteFillObject}
-        >
-        </View>
         <Svg
           width={width}
           height={heigth}
