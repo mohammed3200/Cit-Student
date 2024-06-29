@@ -17,19 +17,24 @@ const DrawerItem: React.FC<DrawerItemProps> = ({
 }) => {
   return (
     <View>
-      <View className="flex-row-reverse">
-        <View
-          className="w-9 h-9 items-center justify-center rounded-full"
-          style={{ backgroundColor: color }}
+      <View className="flex-row-reverse py-1">
+
+          <View
+            className="w-8 h-8 items-center justify-center rounded-full"
+            style={{ backgroundColor: color }}
+          >
+            <Image
+              source={icon}
+              contentFit="contain"
+              className="w-4 h-4"
+              tintColor={"#f0f0f5"}
+            />
+          </View>
+          <TouchableOpacity
+          className="mr-4"
+          onPress={onPress}
+          activeOpacity={0.5}
         >
-          <Image
-            source={icon}
-            contentFit="contain"
-            className="w-5 h-5"
-            tintColor={"#f0f0f5"}
-          />
-        </View>
-        <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
           <Text className="font-DNNextLTB text-sm">{label}</Text>
         </TouchableOpacity>
       </View>

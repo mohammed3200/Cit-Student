@@ -106,7 +106,7 @@ const Profile = ({ ...props }) => {
         <View
           className="absolute top-0 left-0 right-0 bottom-0 
           rounded-tl-[55px] rounded-br-[55px] bg-primary
-          justify-center items-end px-8"
+          justify-center items-end px-16"
         >
           {items.map((item) => (
             <DrawerItem key={item.color} {...item} />
