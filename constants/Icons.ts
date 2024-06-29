@@ -34,4 +34,6 @@ export default {
   nationality: require("@/assets/icons/pennant.png"),
   phone: require("@/assets/icons/phone-flip.png"),
   signOut: require("@/assets/icons/sign-out-alt.png"),
+
+  menu: require("@/assets/icons/menu-burger.png"),
 };
