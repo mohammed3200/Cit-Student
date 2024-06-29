@@ -25,5 +25,13 @@ export default {
 
   rotate: require("@/assets/icons/rotate-right.png"),
 
-  cross: require("@/assets/icons/cross.png")
+  cross: require("@/assets/icons/cross.png"),
+
+  email: require("@/assets/icons/at.png"),
+  points: require("@/assets/icons/boxes.png"),
+  birthday: require("@/assets/icons/cake-birthday.png"),
+  gender: require("@/assets/icons/couple.png"),
+  nationality: require("@/assets/icons/pennant.png"),
+  phone: require("@/assets/icons/phone-flip.png"),
+  signOut: require("@/assets/icons/sign-out-alt.png"),
 };
