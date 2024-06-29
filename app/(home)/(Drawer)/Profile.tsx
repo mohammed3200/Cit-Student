@@ -2,7 +2,8 @@ import { View, Text, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Image } from "expo-image";
 import { Images } from "@/constants";
-import { router, useNavigation } from "expo-router";
+import { router } from "expo-router";
+import { useNavigation,DrawerActions } from '@react-navigation/native';
 import { useAuth } from "@/context";
 import { useFetch } from "@/hooks";
 import { configDataInfoStudent } from "@/Storage/studentStrorage";
@@ -97,7 +98,7 @@ const Profile = ({ ...props }) => {
           <Header
             left={{
               icon: Icons.cross,
-              onPress: () => true,
+              onPress: () =>  navigation.dispatch(DrawerActions.closeDrawer())
             }}
             title="المعلومات الشخصية"
           />

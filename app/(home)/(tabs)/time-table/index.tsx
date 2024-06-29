@@ -2,8 +2,10 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Header } from "@/components";
 import Icons from "@/constants/Icons";
+import { useNavigation,DrawerActions } from '@react-navigation/native';
 
 const TimeTable = () => {
+  const navigation = useNavigation()
   return (
     <View className="flex-1">
       <View
@@ -16,7 +18,7 @@ const TimeTable = () => {
         title="جدول المحاضرات"
         left={{
           icon: Icons.Dot,
-          onPress: () => console.log("menu"),
+          onPress: () => navigation.dispatch(DrawerActions.openDrawer()),
           size: 30
         }}
         right={{
