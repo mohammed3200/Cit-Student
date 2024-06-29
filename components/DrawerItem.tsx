@@ -2,7 +2,7 @@ import { View, Text, Touchable, TouchableOpacity } from "react-native";
 import React from "react";
 import { Image } from "expo-image";
 
-interface DrawerItemProps {
+export interface DrawerItemProps {
   icon: string;
   color: string;
   label: string;

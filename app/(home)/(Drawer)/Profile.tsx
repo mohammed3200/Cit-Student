@@ -1,4 +1,4 @@
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Image } from "expo-image";
 import { Images } from "@/constants";
@@ -8,7 +8,7 @@ import { useFetch } from "@/hooks";
 import { configDataInfoStudent } from "@/Storage/studentStrorage";
 import { InfoStudentItem } from "@/Storage";
 import Icons from "@/constants/Icons";
-import { DrawerItem } from "@/components";
+import { DrawerItem, DrawerItemProps } from "@/components";
 
 interface ProfileProps {}
 const { width } = Dimensions.get("window");
@@ -34,7 +34,7 @@ const Profile = ({ ...props }) => {
     }
   }, [isLoading, data, error]);
 
-  const items = [
+  const items: DrawerItemProps[] = [
     {
       icon: Icons.hash,
       label: Data?.RegistrationNumber || "XXXXXXXX",
@@ -106,8 +106,25 @@ const Profile = ({ ...props }) => {
         <View
           className="absolute top-0 left-0 right-0 bottom-0 
           rounded-tl-[55px] rounded-br-[55px] bg-primary
-          justify-center items-end px-16"
+          justify-center items-end px-12"
         >
+          <View
+            className="bg-secondary-100
+          rounded-full w-28 h-28 self-center
+          absolute "
+          style={{
+            top:-50,
+            left: DRAWER_WIDTH / 2 - 50,
+          }}
+          />
+          <View className="my-2">
+            <Text className="font-DNNextLTB text-center text-xl">
+              {Data?.StudentName}
+            </Text>
+            <Text className="font-DNNextLTB text-center text-sm text-gray-200">
+              {Data?.DepartmentName}
+            </Text>
+          </View>
           {items.map((item) => (
             <DrawerItem key={item.color} {...item} />
           ))}
