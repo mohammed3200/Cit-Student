@@ -1,5 +1,4 @@
 import { View, Text, ScrollView } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { router,Link } from "expo-router";
 import { Images } from "@/constants";
@@ -17,10 +16,6 @@ const Page = () => {
   // },[])
   return (
     <>
-    <StatusBar
-    style="light"
-    backgroundColor="#F0F0F5"
-    />
       <View
         className="flex-1 w-full justify-center 
         items-center h-full"

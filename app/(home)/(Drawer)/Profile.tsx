@@ -108,7 +108,7 @@ const Profile = ({ ...props }) => {
         <View className="flex-1 bg-Bg" />
         <View className="flex-1 bg-secondary-200" />
         <Image
-          source={Images.bg_patterns[0]}
+          source={Images.bg_patterns[1]}
           style={{
             height,
             position: "absolute",
