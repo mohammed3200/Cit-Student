@@ -113,13 +113,13 @@ const Profile = ({ ...props }) => {
           <View
             className="bg-secondary-100
           rounded-full w-28 h-28 self-center
-          absolute p-4"
+          absolute p-4 items-center justify-center"
             style={{
               top: -50,
               left: DRAWER_WIDTH / 2 - 50,
             }}
           >
-            {FailedToLoadImage ? (
+            {!FailedToLoadImage ? (
               <Image
                 source={Data?.PersonalPicture}
                 className="rounded-full w-28 h-28"
@@ -129,16 +129,22 @@ const Profile = ({ ...props }) => {
                 }}
               />
             ) : (
-              <Text className="font-DNNextLTB">
+              <View
+              className="bg-gray-200
+          rounded-full w-24 h-24 self-center
+          absolute p-2 items-center justify-center"
+              >
+              <Text className="font-DNNextLTB text-4xl text-primary">
                 {(data.StudentName?.split(" ")[0]?.charAt(0) || "") +
                   " " +
                   (data.StudentName?.split(" ")[
                     data.StudentName?.split(" ")?.length - 1
                   ]?.charAt(0) || "")}
               </Text>
+              </View>
             )}
           </View>
-          <View className="my-6 ">
+          <View className="mt-16">
             <Text className="font-DNNextLTB text-center text-xl">
               {Data?.StudentName}
             </Text>
@@ -146,9 +152,11 @@ const Profile = ({ ...props }) => {
               {Data?.DepartmentName}
             </Text>
           </View>
+          <View className="mt-4">
           {items.map((item) => (
             <DrawerItem key={item.color} {...item} />
           ))}
+          </View>
         </View>
       </View>
 
