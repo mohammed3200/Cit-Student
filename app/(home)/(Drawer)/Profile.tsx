@@ -2,13 +2,13 @@ import { View, Text, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Image } from "expo-image";
 import { Images } from "@/constants";
-import { useNavigation } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import { useAuth } from "@/context";
 import { useFetch } from "@/hooks";
 import { configDataInfoStudent } from "@/Storage/studentStrorage";
 import { InfoStudentItem } from "@/Storage";
 import Icons from "@/constants/Icons";
-import { DrawerItem, DrawerItemProps } from "@/components";
+import { DrawerItem, DrawerItemProps, Header } from "@/components";
 
 interface ProfileProps {}
 const { width } = Dimensions.get("window");
@@ -81,6 +81,10 @@ const Profile = ({ ...props }) => {
       icon: Icons.signOut,
       label: "تسجيل الخروج",
       color: "#EF3533",
+      onPress: () => {
+        onLogout;
+        router.replace("/(auth)/sign-in");
+      },
     },
   ];
   return (
@@ -89,13 +93,22 @@ const Profile = ({ ...props }) => {
         <View
           className="absolute top-0 left-0 right-0 bottom-0 
           rounded-br-[55px] bg-Bg"
-        ></View>
+        >
+          <Header
+            left={{
+              icon: Icons.cross,
+              onPress: () => true,
+            }}
+            title="المعلومات الشخصية"
+          />
+        </View>
       </View>
+
       <View style={{ flex: 0.8 }}>
         <View className="flex-1 bg-Bg" />
         <View className="flex-1 bg-secondary-200" />
         <Image
-          source={Images.bg_patterns[1]}
+          source={Images.bg_patterns[0]}
           style={{
             height,
             position: "absolute",
@@ -123,24 +136,24 @@ const Profile = ({ ...props }) => {
               <Image
                 source={Data?.PersonalPicture}
                 className="rounded-full w-28 h-28"
-                contentFit="contain"
+                contentFit="cover"
                 onError={() => {
                   setFailedToLoadImage(true);
                 }}
               />
             ) : (
               <View
-              className="bg-gray-200
+                className="bg-[rgba(255,255,255,0.3)]
           rounded-full w-24 h-24 self-center
           absolute p-2 items-center justify-center"
               >
-              <Text className="font-DNNextLTB text-4xl text-primary">
-                {(data.StudentName?.split(" ")[0]?.charAt(0) || "") +
-                  " " +
-                  (data.StudentName?.split(" ")[
-                    data.StudentName?.split(" ")?.length - 1
-                  ]?.charAt(0) || "")}
-              </Text>
+                <Text className="font-DNNextLTB drop-shadow-md text-4xl text-primary">
+                  {(data.StudentName?.split(" ")[0]?.charAt(0) || "") +
+                    " " +
+                    (data.StudentName?.split(" ")[
+                      data.StudentName?.split(" ")?.length - 1
+                    ]?.charAt(0) || "")}
+                </Text>
               </View>
             )}
           </View>
@@ -153,9 +166,9 @@ const Profile = ({ ...props }) => {
             </Text>
           </View>
           <View className="mt-4">
-          {items.map((item) => (
-            <DrawerItem key={item.color} {...item} />
-          ))}
+            {items.map((item) => (
+              <DrawerItem key={item.color} {...item} />
+            ))}
           </View>
         </View>
       </View>
@@ -170,10 +183,6 @@ const Profile = ({ ...props }) => {
         <Image
           source={Images.bg_patterns[0]}
           style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: -height * (1 - 0.61),
             width: DRAWER_WIDTH,
             height,
             borderTopLeftRadius: 55,

@@ -12,6 +12,7 @@ import QrCodeScanner from "./QrCode";
 import { StrokeAnimation } from "./StrokeAnimation";
 import AnimatedStroke from "./AnimatedStroke";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
+import Header from "./Header";
 export {
   TabIcon,
   OnboardingItem,
@@ -28,4 +29,5 @@ export {
   AnimatedStroke,
   DrawerItem,
   DrawerItemProps,
+  Header,
 };
