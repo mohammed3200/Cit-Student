@@ -23,7 +23,7 @@
     "@react-navigation/stack": "^6.3.29",
     "axios": "^1.6.8",
     "d3-shape": "^3.2.0",
-    "expo": "51.0.16",
+    "expo": "51.0.17",
     "expo-barcode-scanner": "^13.0.1",
     "expo-camera": "15.0.12",
     "expo-constants": "16.0.2",

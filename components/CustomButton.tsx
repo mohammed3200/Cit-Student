@@ -36,7 +36,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       }}
     >
       {isLoading && (
-        <View className="absolute self-center justify-self-center right-5">
+        <View className="absolute self-center justify-self-center left-1/3">
           <Chase size={36} color="#333333" />
         </View>
       )}

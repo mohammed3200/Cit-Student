@@ -1,8 +1,7 @@
 import React from "react";
 import { Drawer as ERDrawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-// import Drawer, { DRAWER_WIDTH } from "./(Drawer)";
-
+import Profile, { DRAWER_WIDTH }  from './(Drawer)/Profile';
 const HomeLayout = () => {
   return (
     <>
@@ -11,10 +10,10 @@ const HomeLayout = () => {
           screenOptions={{
             headerShown: false,
             drawerStyle:{
-            //   width: DRAWER_WIDTH,
+              width: DRAWER_WIDTH,
             },
           }}
-        //   drawerContent={Drawer}
+          drawerContent={Profile}
         >
         </ERDrawer>
       </GestureHandlerRootView>

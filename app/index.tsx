@@ -13,8 +13,7 @@ const Page = () => {
   // useEffect(()=>{
   //   if(!authState?.token) router.replace("/Onboarding");
   //   if(authState?.token && !authState.authenticated) router.replace("/(auth)/sign-in");
-  //   if(authState?.token && authState.token) router.replace("/(home)/(Drawer)")
-
+  //   if(authState?.token && authState.token) router.replace("/(home)/(tabs)/time-table");
   // },[])
   return (
     <>
@@ -36,6 +35,9 @@ const Page = () => {
         </View> */}
         <Link href="/Onboarding">
             <Text>Go Onboarding</Text>
+          </Link>
+          <Link href="/(home)/(tabs)/time-table">
+            <Text>Go home</Text>
           </Link>
       </View>
     </>
