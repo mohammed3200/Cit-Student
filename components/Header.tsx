@@ -18,7 +18,12 @@ interface HeaderProps {
   dark?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ left, title, right, dark }) => {
+const Header: React.FC<HeaderProps> = ({
+  left,
+  title,
+  right,
+  dark = false,
+}) => {
   const insets = useSafeAreaInsets();
   const color = dark ? "#13163e" : "#CDCDE0";
   const backgroundColor = dark ? "#CDCDE0" : "#13163e";
@@ -33,13 +38,12 @@ const Header: React.FC<HeaderProps> = ({ left, title, right, dark }) => {
           height: left.size ?? 24,
           backgroundColor,
         }}
-        className="rounded-full"
+        className="rounded-sm"
         onPress={left.onPress}
       >
         <Image
           source={left.icon}
           contentFit="contain"
-          className="rounded-full"
           style={{
             width: left.size ? left.size * 0.8 : 18,
             height: left.size ? left.size * 0.8 : 18,

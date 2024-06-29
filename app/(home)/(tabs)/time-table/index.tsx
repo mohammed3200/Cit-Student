@@ -15,8 +15,14 @@ const TimeTable = () => {
         <Header
         title="جدول المحاضرات"
         left={{
-          icon: Icons.menu,
+          icon: Icons.Dot,
           onPress: () => console.log("menu"),
+          size: 30
+        }}
+        right={{
+          icon:Icons.menuDot,
+          onPress: () => true,
+          size: 30
         }}
         />
       </View>

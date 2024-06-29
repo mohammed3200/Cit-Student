@@ -36,4 +36,7 @@ export default {
   signOut: require("@/assets/icons/sign-out-alt.png"),
 
   menu: require("@/assets/icons/menu-burger.png"),
+  Dot : require("@/assets/icons/menu-dots-vertical.png"),
+  menuDot : require("@/assets/icons/list.png"),
+
 };
