@@ -8,6 +8,7 @@ import { useFetch } from "@/hooks";
 import { configDataInfoStudent } from "@/Storage/studentStrorage";
 import { InfoStudentItem } from "@/Storage";
 import Icons from "@/constants/Icons";
+import { DrawerItem } from "@/components";
 
 interface ProfileProps {}
 const { width } = Dimensions.get("window");
@@ -46,7 +47,7 @@ const Profile = ({ ...props }) => {
     },
     {
       icon: Icons.email,
-      label: Data?.citemail,
+      label: Data?.citemail || "لا يوجد حاليا",
       color: "#3a5fb3",
     },
     {
@@ -104,8 +105,13 @@ const Profile = ({ ...props }) => {
         />
         <View
           className="absolute top-0 left-0 right-0 bottom-0 
-          rounded-tl-[55px] rounded-br-[55px] bg-primary"
-        ></View>
+          rounded-tl-[55px] rounded-br-[55px] bg-primary
+          justify-center items-end px-8"
+        >
+          {items.map((item) => (
+            <DrawerItem key={item.color} {...item} />
+          ))}
+        </View>
       </View>
 
       <View

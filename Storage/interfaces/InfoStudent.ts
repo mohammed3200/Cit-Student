@@ -23,7 +23,7 @@ export interface InfoStudentItem {
   DateOfBirth: string;
   Nationality: string;
   gender: string;
-  citemail: string;
+  citemail: string | null;
   CumulativeAverage: string;
   UnitsCompleted: string;
   PhoneNumber:string;

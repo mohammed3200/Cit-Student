@@ -11,6 +11,7 @@ import CloseButton from "./CloseButton";
 import QrCodeScanner from "./QrCode";
 import { StrokeAnimation } from "./StrokeAnimation";
 import AnimatedStroke from "./AnimatedStroke";
+import DrawerItem from "./DrawerItem";
 export {
   TabIcon,
   OnboardingItem,
@@ -25,4 +26,5 @@ export {
   QrCodeScanner,
   StrokeAnimation,
   AnimatedStroke,
+  DrawerItem,
 };
