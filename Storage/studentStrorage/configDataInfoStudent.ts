@@ -4,7 +4,7 @@ import moment from "moment";
 export const configDataInfoStudent = (data: InfoStudent): InfoStudentItem => {
   // If the image is empty, it takes the first letter of the first word and the first letter of the last word
   const PersonalPicture =
-    data.PersonalPicture ||
+    data.PersonalPicture ??
     (data.StudentName?.split(" ")[0]?.charAt(0) || "") +
       (data.StudentName?.split(" ")[
         data.StudentName?.split(" ")?.length - 1

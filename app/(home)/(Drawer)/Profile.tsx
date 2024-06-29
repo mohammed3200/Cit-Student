@@ -87,7 +87,9 @@ const Profile = ({ ...props }) => {
         <View
           className="absolute top-0 left-0 right-0 bottom-0 
           rounded-br-[55px] bg-Bg"
-        />
+        >
+
+        </View>
       </View>
       <View style={{ flex: 0.8 }}>
         <View className="flex-1 bg-Bg" />
@@ -111,13 +113,19 @@ const Profile = ({ ...props }) => {
           <View
             className="bg-secondary-100
           rounded-full w-28 h-28 self-center
-          absolute "
+          absolute p-4"
           style={{
             top:-50,
             left: DRAWER_WIDTH / 2 - 50,
           }}
-          />
-          <View className="my-2">
+          >
+            <Image
+            source={Data?.PersonalPicture}
+            className="rounded-full w-28 h-28"
+            contentFit="contain"
+            />
+          </View>
+          <View className="my-6 ">
             <Text className="font-DNNextLTB text-center text-xl">
               {Data?.StudentName}
             </Text>
