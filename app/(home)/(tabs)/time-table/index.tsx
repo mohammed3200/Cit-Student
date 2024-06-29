@@ -19,12 +19,10 @@ const TimeTable = () => {
         left={{
           icon: Icons.Dot,
           onPress: () => navigation.dispatch(DrawerActions.openDrawer()),
-          size: 30
         }}
         right={{
           icon:Icons.menuDot,
           onPress: () => true,
-          size: 30
         }}
         />
       </View>
