@@ -18,7 +18,7 @@ export interface InfoStudent {
 export interface InfoStudentItem {
   StudentName: string;
   RegistrationNumber: string;
-  PersonalPicture: string;
+  PersonalPicture: string | undefined;
   DepartmentName: string;
   DateOfBirth: string;
   Nationality: string;

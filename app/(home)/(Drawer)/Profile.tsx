@@ -20,12 +20,14 @@ const Profile = ({ ...props }) => {
   const navigation = useNavigation();
   const { onLogout } = useAuth();
   const [Data, setData] = useState<InfoStudentItem>();
+  const [FailedToLoadImage, setFailedToLoadImage] = useState(false);
   const { data, isLoading, error, refetch } = useFetch("/student/me");
   useEffect(() => {
     // Try to toad data from storage first
     // const storedData = StorageInfoStudentGet( ) ;
     if (data) {
       setData(configDataInfoStudent(data));
+      setFailedToLoadImage(false);
       // else if (!isLoading !data && error) {
       // // If there ts an error, show a message to the user
       // const errorMessage =
@@ -87,9 +89,7 @@ const Profile = ({ ...props }) => {
         <View
           className="absolute top-0 left-0 right-0 bottom-0 
           rounded-br-[55px] bg-Bg"
-        >
-
-        </View>
+        ></View>
       </View>
       <View style={{ flex: 0.8 }}>
         <View className="flex-1 bg-Bg" />
@@ -114,16 +114,29 @@ const Profile = ({ ...props }) => {
             className="bg-secondary-100
           rounded-full w-28 h-28 self-center
           absolute p-4"
-          style={{
-            top:-50,
-            left: DRAWER_WIDTH / 2 - 50,
-          }}
+            style={{
+              top: -50,
+              left: DRAWER_WIDTH / 2 - 50,
+            }}
           >
-            <Image
-            source={Data?.PersonalPicture}
-            className="rounded-full w-28 h-28"
-            contentFit="contain"
-            />
+            {FailedToLoadImage ? (
+              <Image
+                source={Data?.PersonalPicture}
+                className="rounded-full w-28 h-28"
+                contentFit="contain"
+                onError={() => {
+                  setFailedToLoadImage(true);
+                }}
+              />
+            ) : (
+              <Text className="font-DNNextLTB">
+                {(data.StudentName?.split(" ")[0]?.charAt(0) || "") +
+                  " " +
+                  (data.StudentName?.split(" ")[
+                    data.StudentName?.split(" ")?.length - 1
+                  ]?.charAt(0) || "")}
+              </Text>
+            )}
           </View>
           <View className="my-6 ">
             <Text className="font-DNNextLTB text-center text-xl">
