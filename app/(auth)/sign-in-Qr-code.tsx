@@ -13,6 +13,7 @@ import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useAuth } from "@/context";
 import { usePushNotifications } from "@/hooks";
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 
 const SigInQrCode = () => {
   const { onLoginByQrCode } = useAuth();
@@ -58,6 +59,11 @@ const SigInQrCode = () => {
         }
       } catch (error) {
         console.error(error);
+        Toast.show({
+          type: ALERT_TYPE.DANGER,
+          title: 'خطاء',
+          textBody: 'يرجى التأكد من رمز الاستجابة السريعة واعادة المحاولة لاحقا',
+        })
       }
     }
   };
@@ -74,6 +80,7 @@ const SigInQrCode = () => {
 
   return (
     <SafeAreaProvider>
+      <AlertNotificationRoot>
       <StatusBar style="light" />
       <Container pattern={2} {...{ footer }}>
         <View className="px-8 py-4 items-center">
@@ -102,6 +109,7 @@ const SigInQrCode = () => {
           />
         </View>
       </Container>
+      </AlertNotificationRoot>
     </SafeAreaProvider>
   );
 };

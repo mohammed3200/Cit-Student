@@ -9,6 +9,7 @@ import { router } from "expo-router";
 import { useAuth } from "@/context";
 import { usePushNotifications } from "@/hooks";
 import { StatusBar } from "expo-status-bar";
+import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 
 const SignIn = () => {
   const [isLoading,setIsLoading] = useState<boolean>(false)
@@ -78,6 +79,11 @@ const SignIn = () => {
         }
       } catch (error) {
         console.error(error);
+        Toast.show({
+          type: ALERT_TYPE.DANGER,
+          title: 'خطاء',
+          textBody: 'يرجى التأكد من البيانات المدخلة واعادة المحاولة لاحقا',
+        })
       }
     }
   };
@@ -91,6 +97,7 @@ const SignIn = () => {
 
   return (
     <SafeAreaProvider>
+      <AlertNotificationRoot>
       <StatusBar style="light" />
       <KeyboardAwareScrollView
         style={{ flex: 1 }}
@@ -142,6 +149,7 @@ const SignIn = () => {
           </View>
         </Container>
       </KeyboardAwareScrollView>
+      </AlertNotificationRoot>
     </SafeAreaProvider>
   );
 };
