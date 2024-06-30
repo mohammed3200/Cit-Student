@@ -8,12 +8,14 @@ interface HeaderProps {
     icon: string;
     onPress: () => void;
     size?: number;
+    backgroundColor?: string;
   };
   title: string;
   right?: {
     icon: string;
     onPress: () => void;
     size?: number;
+    backgroundColor?: string;
   };
   dark?: boolean;
 }
@@ -36,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({
         style={{
           width: left.size ?? 24,
           height: left.size ?? 24,
-          backgroundColor,
+          backgroundColor: left.backgroundColor ?? backgroundColor,
         }}
         className="rounded-sm"
         onPress={left.onPress}
@@ -61,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({
           style={{
             width: right.size ?? 24,
             height: right.size ?? 24,
-            backgroundColor,
+            backgroundColor: right.backgroundColor ?? backgroundColor,
           }}
           onPress={right.onPress}
         >
