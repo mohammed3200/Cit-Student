@@ -3,13 +3,19 @@ import React, { useEffect, useState } from "react";
 import { Image } from "expo-image";
 import { Images } from "@/constants";
 import { router } from "expo-router";
-import { useNavigation,DrawerActions } from '@react-navigation/native';
+import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { useAuth } from "@/context";
 import { useFetch } from "@/hooks";
 import { configDataInfoStudent } from "@/Storage/studentStrorage";
 import { InfoStudentItem } from "@/Storage";
 import Icons from "@/constants/Icons";
 import { DrawerItem, DrawerItemProps, Header } from "@/components";
+import {
+  ALERT_TYPE,
+  Dialog,
+  AlertNotificationRoot,
+  Toast,
+} from "react-native-alert-notification";
 
 interface ProfileProps {}
 const { width } = Dimensions.get("window");
@@ -29,11 +35,17 @@ const Profile = ({ ...props }) => {
     if (data) {
       setData(configDataInfoStudent(data));
       setFailedToLoadImage(false);
-      // else if (!isLoading !data && error) {
+    } else if (!isLoading || (!data && error)) {
       // // If there ts an error, show a message to the user
       // const errorMessage =
       // getErrorMessageFromStatusCode(parseint(error)) ;
-      // alert( er rorMessage ) ;
+      // alert( errorMessage ) ;
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: "خطاء",
+        textBody: "يجب اعادة تسجيل الدخول",
+      });
+      router.replace("/Welcome");
     }
   }, [isLoading, data, error]);
 
@@ -89,108 +101,110 @@ const Profile = ({ ...props }) => {
     },
   ];
   return (
-    <View className="flex-1">
-      <View style={{ flex: 0.2 }} className="bg-primary">
-        <View
-          className="absolute top-0 left-0 right-0 bottom-0 
+    <AlertNotificationRoot>
+      <View className="flex-1">
+        <View style={{ flex: 0.2 }} className="bg-primary">
+          <View
+            className="absolute top-0 left-0 right-0 bottom-0 
           rounded-br-[55px] bg-Bg"
-        >
-          <Header
-            left={{
-              icon: Icons.cross,
-              onPress: () =>  navigation.dispatch(DrawerActions.closeDrawer())
+          >
+            <Header
+              left={{
+                icon: Icons.cross,
+                onPress: () => navigation.dispatch(DrawerActions.closeDrawer()),
+              }}
+              title="المعلومات الشخصية"
+            />
+          </View>
+        </View>
+
+        <View style={{ flex: 0.8 }}>
+          <View className="flex-1 bg-Bg" />
+          <View className="flex-1 bg-secondary-200" />
+          <Image
+            source={Images.bg_patterns[1]}
+            style={{
+              height,
+              position: "absolute",
+              width: DRAWER_WIDTH,
+              bottom: -height * 0.61,
+              left: 0,
+              right: 0,
             }}
-            title="المعلومات الشخصية"
+          />
+          <View
+            className="absolute top-0 left-0 right-0 bottom-0 
+          rounded-tl-[55px] rounded-br-[55px] bg-primary
+          justify-center items-end px-12"
+          >
+            <View
+              className="bg-secondary-100
+          rounded-full w-28 h-28 self-center
+          absolute p-4 items-center justify-center"
+              style={{
+                top: -50,
+                left: DRAWER_WIDTH / 2 - 50,
+              }}
+            >
+              {!FailedToLoadImage ? (
+                <Image
+                  source={Data?.PersonalPicture}
+                  className="rounded-full w-28 h-28"
+                  contentFit="cover"
+                  onError={() => {
+                    setFailedToLoadImage(true);
+                  }}
+                />
+              ) : (
+                <View
+                  className="bg-[rgba(255,255,255,0.3)]
+          rounded-full w-24 h-24 self-center
+          absolute p-2 items-center justify-center"
+                >
+                  <Text className="font-DNNextLTB drop-shadow-md text-4xl text-primary">
+                    {(data.StudentName?.split(" ")[0]?.charAt(0) || "") +
+                      " " +
+                      (data.StudentName?.split(" ")[
+                        data.StudentName?.split(" ")?.length - 1
+                      ]?.charAt(0) || "")}
+                  </Text>
+                </View>
+              )}
+            </View>
+            <View className="mt-16">
+              <Text className="font-DNNextLTB text-center text-xl">
+                {Data?.StudentName}
+              </Text>
+              <Text className="font-DNNextLTB text-center text-sm text-gray-200">
+                {Data?.DepartmentName}
+              </Text>
+            </View>
+            <View className="mt-4">
+              {items.map((item) => (
+                <DrawerItem key={item.color} {...item} />
+              ))}
+            </View>
+          </View>
+        </View>
+
+        <View
+          style={{
+            width: DRAWER_WIDTH,
+            height: height * 0.61,
+          }}
+          className="bg-primary overflow-hidden"
+        >
+          <Image
+            source={Images.bg_patterns[0]}
+            style={{
+              width: DRAWER_WIDTH,
+              height,
+              borderTopLeftRadius: 55,
+            }}
           />
         </View>
       </View>
-
-      <View style={{ flex: 0.8 }}>
-        <View className="flex-1 bg-Bg" />
-        <View className="flex-1 bg-secondary-200" />
-        <Image
-          source={Images.bg_patterns[1]}
-          style={{
-            height,
-            position: "absolute",
-            width: DRAWER_WIDTH,
-            bottom: -height * 0.61,
-            left: 0,
-            right: 0,
-          }}
-        />
-        <View
-          className="absolute top-0 left-0 right-0 bottom-0 
-          rounded-tl-[55px] rounded-br-[55px] bg-primary
-          justify-center items-end px-12"
-        >
-          <View
-            className="bg-secondary-100
-          rounded-full w-28 h-28 self-center
-          absolute p-4 items-center justify-center"
-            style={{
-              top: -50,
-              left: DRAWER_WIDTH / 2 - 50,
-            }}
-          >
-            {!FailedToLoadImage ? (
-              <Image
-                source={Data?.PersonalPicture}
-                className="rounded-full w-28 h-28"
-                contentFit="cover"
-                onError={() => {
-                  setFailedToLoadImage(true);
-                }}
-              />
-            ) : (
-              <View
-                className="bg-[rgba(255,255,255,0.3)]
-          rounded-full w-24 h-24 self-center
-          absolute p-2 items-center justify-center"
-              >
-                <Text className="font-DNNextLTB drop-shadow-md text-4xl text-primary">
-                  {(data.StudentName?.split(" ")[0]?.charAt(0) || "") +
-                    " " +
-                    (data.StudentName?.split(" ")[
-                      data.StudentName?.split(" ")?.length - 1
-                    ]?.charAt(0) || "")}
-                </Text>
-              </View>
-            )}
-          </View>
-          <View className="mt-16">
-            <Text className="font-DNNextLTB text-center text-xl">
-              {Data?.StudentName}
-            </Text>
-            <Text className="font-DNNextLTB text-center text-sm text-gray-200">
-              {Data?.DepartmentName}
-            </Text>
-          </View>
-          <View className="mt-4">
-            {items.map((item) => (
-              <DrawerItem key={item.color} {...item} />
-            ))}
-          </View>
-        </View>
-      </View>
-
-      <View
-        style={{
-          width: DRAWER_WIDTH,
-          height: height * 0.61,
-        }}
-        className="bg-primary overflow-hidden"
-      >
-        <Image
-          source={Images.bg_patterns[0]}
-          style={{
-            width: DRAWER_WIDTH,
-            height,
-            borderTopLeftRadius: 55,
-          }}
-        />
-      </View>
-    </View>
+    </AlertNotificationRoot>
   );
 };
 
