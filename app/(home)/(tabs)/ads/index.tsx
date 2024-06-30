@@ -95,7 +95,7 @@ const Ads = () => {
     setSortUp((prevSortUp) => !prevSortUp);
     setData(sortedData);
   };
-  
+
   return (
     // <ScrollView
     //   refreshControl={
@@ -137,6 +137,7 @@ const Ads = () => {
                     title={item.Title}
                     description={trimDescription(item.Description)}
                     period={item.When}
+                    onPress={() => true}
                     key={index.toString()}
                   />
                 ))

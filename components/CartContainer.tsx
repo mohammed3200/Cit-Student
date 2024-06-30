@@ -35,7 +35,7 @@ const CartContainer: React.FC<CartContainerProps> = ({ children }) => {
           width="100%"
           height="100%"
           preserveAspectRatio="xMidYMid slice"
-          href={Images.bg_patterns[2]}
+          href={Images.bg_patterns[0]}
           clipPath="url(#clip)"
         />
       </Svg>
