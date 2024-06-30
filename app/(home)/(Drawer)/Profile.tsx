@@ -194,7 +194,7 @@ const Profile = ({ ...props }) => {
           className="bg-primary overflow-hidden"
         >
           <Image
-            source={Images.bg_patterns[0]}
+            source={Images.bg_patterns[2]}
             style={{
               width: DRAWER_WIDTH,
               height,

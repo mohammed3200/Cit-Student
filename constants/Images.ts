@@ -8,9 +8,9 @@ export default {
   bg_pattern_hex: require("@/assets/images/bg-pattern.svg"),
   undraw_warning: require("@/assets/images/undraw_warning.svg"),
   bg_patterns: [
-    require("@/assets/images/bg-pattern/1.svg"),
-    require("@/assets/images/bg-pattern/2.svg"),
-    require("@/assets/images/bg-pattern/3.svg"),
-    require("@/assets/images/bg-pattern/4.svg"),
+    require("@/assets/images/bg-pattern/1.png"),
+    require("@/assets/images/bg-pattern/2.png"),
+    require("@/assets/images/bg-pattern/3.png"),
+    require("@/assets/images/bg-pattern/4.png"),
   ] // Explicitly required SVG images
 };

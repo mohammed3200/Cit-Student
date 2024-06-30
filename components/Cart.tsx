@@ -15,8 +15,14 @@ const Cart:React.FC<CartProps> = ({
     period,
 }) => {
   return (
-    <View>
-      <Text>{title}</Text>
+    <View
+    className="flex-row p-4"
+    >
+      <View
+      className="bg-yellow-300 w-32 h-32 rounded-lg"
+      >
+
+      </View>
     </View>
   );
 };
