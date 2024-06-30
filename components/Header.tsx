@@ -40,7 +40,6 @@ const Header: React.FC<HeaderProps> = ({
           height: left.size ?? 24,
           backgroundColor: left.backgroundColor ?? backgroundColor,
         }}
-        className="rounded-sm"
         onPress={left.onPress}
       >
         <Image
@@ -70,7 +69,6 @@ const Header: React.FC<HeaderProps> = ({
           <Image
             source={right.icon}
             contentFit="contain"
-            className="rounded-full"
             style={{
               width: right.size ? right.size * 0.8 : 18,
               height: right.size ? right.size * 0.8 : 18,

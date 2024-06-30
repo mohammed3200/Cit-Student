@@ -75,6 +75,7 @@ const Ads = () => {
     }
     setRefreshing(false);
   }, [data, error, refetch]);
+
   const trimDescription = (description: string) => {
     if (description.length > 30) {
       return description.slice(0, 30) + "...";
@@ -109,17 +110,17 @@ const Ads = () => {
     // >
     <AlertNotificationRoot>
       <CartContainer>
-        <View className="bg-secondary">
+        <View className="bg-Bg">
           <Header
             title="الاعلانات"
             left={{
-              icon: icons.menuDot,
+              icon: icons.Dot,
               onPress: () => navigator.dispatch(DrawerActions.openDrawer()),
               size: 25,
               backgroundColor: "#FF6600",
             }}
             right={{
-              icon: sortUp ? icons.sortUp : icons.sortDown,
+              icon: !sortUp ? icons.sortUp : icons.sortDown,
               onPress: () => SortByPeriod(!sortUp),
               size: 25,
               backgroundColor: "#FF6600",

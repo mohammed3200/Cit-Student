@@ -11,5 +11,6 @@ export default {
     require("@/assets/images/bg-pattern/1.svg"),
     require("@/assets/images/bg-pattern/2.svg"),
     require("@/assets/images/bg-pattern/3.svg"),
+    require("@/assets/images/bg-pattern/4.svg"),
   ] // Explicitly required SVG images
 };
