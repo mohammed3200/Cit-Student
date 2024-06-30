@@ -25,6 +25,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Svg, { Path } from "react-native-svg";
+import { Chase } from "react-native-animated-spinkit";
 
 const { width } = Dimensions.get("window");
 const aspectRatio = width / 375;
@@ -130,28 +131,32 @@ const Ads = () => {
             contentContainerStyle={{ paddingVertical: 50 * aspectRatio }}
             showsVerticalScrollIndicator={false}
           >
-            {Data.length > 0
-              ? Data.map((item, index) => (
-                  <Cart
-                    image={item.photo[0]}
-                    title={item.Title}
-                    description={trimDescription(item.Description)}
-                    period={item.When}
-                    onPress={() =>
-                      router.replace({
-                        pathname: "ads/post",
-                        params: {
-                          image: item.photo,
-                          title: item.Title,
-                          description: item.Description,
-                          period: item.When,
-                        },
-                      })
-                    }
-                    key={index.toString()}
-                  />
-                ))
-              : null}
+            {Data.length > 0 ? (
+              Data.map((item, index) => (
+                <Cart
+                  image={item.photo[0]}
+                  title={item.Title}
+                  description={trimDescription(item.Description)}
+                  period={item.When}
+                  onPress={() =>
+                    router.replace({
+                      pathname: "ads/post",
+                      params: {
+                        image: item.photo,
+                        title: item.Title,
+                        description: item.Description,
+                        period: item.When,
+                      },
+                    })
+                  }
+                  key={index.toString()}
+                />
+              ))
+            ) : (
+              <View className="items-center justify-center">
+                <Chase size={60} color="#333333" />
+              </View>
+            )}
           </ScrollView>
 
           <View

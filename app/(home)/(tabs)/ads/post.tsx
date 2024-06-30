@@ -14,6 +14,8 @@ const post = () => {
           left={{
             icon: icons.arrow,
             onPress: () => router.replace("ads/index"),
+            size:30,
+            backgroundColor:"#F0F0F5"
           }}
           dark
         />

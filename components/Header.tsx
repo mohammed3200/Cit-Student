@@ -41,6 +41,7 @@ const Header: React.FC<HeaderProps> = ({
           backgroundColor: left.backgroundColor ?? backgroundColor,
         }}
         onPress={left.onPress}
+        className="items-center justify-center rounded-sm"
       >
         <Image
           source={left.icon}
@@ -65,6 +66,7 @@ const Header: React.FC<HeaderProps> = ({
             backgroundColor: right.backgroundColor ?? backgroundColor,
           }}
           onPress={right.onPress}
+        className="items-center justify-center rounded-sm"
         >
           <Image
             source={right.icon}
