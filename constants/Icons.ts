@@ -39,4 +39,7 @@ export default {
   Dot : require("@/assets/icons/menu-dots-vertical.png"),
   menuDot : require("@/assets/icons/list.png"),
 
+  sortUp: require("@/assets/icons/bars-sortUp.png"),
+  sortDown: require("@/assets/icons/bars-sortDown.png"),
+
 };

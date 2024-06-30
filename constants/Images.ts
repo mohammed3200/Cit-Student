@@ -6,6 +6,7 @@ export default {
   undraw_notifications: require("@/assets/images/undraw_notifications.svg"),
   undraw_welcoming: require("@/assets/images/undraw_welcoming.svg"),
   bg_pattern_hex: require("@/assets/images/bg-pattern.svg"),
+  undraw_warning: require("@/assets/images/undraw_warning.svg"),
   bg_patterns: [
     require("@/assets/images/bg-pattern/1.svg"),
     require("@/assets/images/bg-pattern/2.svg"),
