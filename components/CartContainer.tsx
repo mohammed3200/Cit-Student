@@ -10,7 +10,7 @@ interface CartContainerProps {
 
 const CartContainer: React.FC<CartContainerProps> = ({ children }) => {
   return (
-    <View className="flex-1 bg-Bg">
+    <View className="flex-1 bg-primary">
         {children}
     </View>
   );

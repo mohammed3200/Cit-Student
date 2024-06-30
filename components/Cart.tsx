@@ -12,11 +12,11 @@ const Cart:React.FC<CartProps> = ({
     image,
     title,
     description,
-    period
+    period,
 }) => {
   return (
     <View>
-      <Text>Cart</Text>
+      <Text>{title}</Text>
     </View>
   );
 };

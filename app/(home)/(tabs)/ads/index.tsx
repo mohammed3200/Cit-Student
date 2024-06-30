@@ -34,7 +34,7 @@ const d = "M 0 0 A 50 50 0 0 0 50 50 H 325 A 50 50 0 0 1 375 100 V 0 Z";
 const Ads = () => {
   const navigator = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
-  const [sortUp, setSortUp] = useState<boolean | undefined>(false);
+  const [sortUp, setSortUp] = useState<boolean>(false);
   const [Data, setData] = useState<EventItem[]>([]); // useState is initialized with an empty array
   const { data, isLoading, error, refetch } = useFetch("/event");
 
@@ -84,23 +84,18 @@ const Ads = () => {
   };
 
   const SortByPeriod = (isUp: boolean) => {
-    // Create a copy of Data to avoid mutating state directly
     const sortedData = [...Data];
-
-    // Sort the copied array based on the desired criteria
     sortedData.sort((a, b) => {
-      // Convert Date objects to numeric timestamps for comparison
-      const dateA = new Date(a.date_pub).getTime(); // Get milliseconds since the Unix Epoch
-      const dateB = new Date(b.date_pub).getTime(); // Get milliseconds since the Unix Epoch
-      return isUp ? dateB - dateA : dateA - dateB;
+      if (isUp) {
+        return a.date_pub.isBefore(b.date_pub) ? -1 : 1;
+      } else {
+        return a.date_pub.isAfter(b.date_pub) ? -1 : 1;
+      }
     });
-
-    // Toggle the sortUp state
     setSortUp((prevSortUp) => !prevSortUp);
-
-    // Update the state with the sorted array
     setData(sortedData);
   };
+  
   return (
     // <ScrollView
     //   refreshControl={
@@ -116,16 +111,13 @@ const Ads = () => {
             left={{
               icon: icons.Dot,
               onPress: () => navigator.dispatch(DrawerActions.openDrawer()),
-              size: 25,
-              backgroundColor: "#FF6600",
+              size: 22,
             }}
             right={{
               icon: !sortUp ? icons.sortUp : icons.sortDown,
-              onPress: () => SortByPeriod(!sortUp),
-              size: 25,
-              backgroundColor: "#FF6600",
+              onPress: () => SortByPeriod(sortUp),
+              size: 22,
             }}
-            dark
           />
         </View>
 
@@ -156,7 +148,7 @@ const Ads = () => {
             className="absolute  top-0 left-0 right-0"
           >
             <Svg style={StyleSheet.absoluteFill} viewBox="0 0 375 100">
-              <Path d={d} fill={"#FF6600"} />
+              <Path d={d} fill={"#13163e"} />
             </Svg>
           </View>
         </View>

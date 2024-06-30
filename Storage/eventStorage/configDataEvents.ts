@@ -60,5 +60,6 @@ export const configDataEvents = (data: Events) => {
     // When the publication was published
     When: when_str,
     photo: data.Image,
+    date_pub
   };
 };

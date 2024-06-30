@@ -1,3 +1,5 @@
+import moment, { Moment } from "moment";
+
 export interface Events {
   Title: string;
   Publication_date: string;
@@ -9,6 +11,6 @@ export interface EventItem {
     Title: string;
     Description: string;
     When: string;
-    date_pub: number; // or bigint
+    date_pub: moment.Moment; // or bigint
     photo: string[];
   }
