@@ -12,7 +12,6 @@ import Icons from "@/constants/Icons";
 import { DrawerItem, DrawerItemProps, Header } from "@/components";
 import {
   ALERT_TYPE,
-  Dialog,
   AlertNotificationRoot,
   Toast,
 } from "react-native-alert-notification";

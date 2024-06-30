@@ -13,7 +13,6 @@ import { StrokeAnimation } from "./StrokeAnimation";
 import AnimatedStroke from "./AnimatedStroke";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
 import Header from "./Header";
-import Card from "./Card";
 export {
   TabIcon,
   OnboardingItem,
@@ -31,5 +30,4 @@ export {
   DrawerItem,
   DrawerItemProps,
   Header,
-  Card,
 };

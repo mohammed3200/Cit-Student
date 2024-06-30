@@ -1,12 +1,15 @@
 import { Cart, CartContainer, Header } from "@/components";
 import { icons } from "@/constants";
 
-import { getErrorMessageFromStatusCode } from "@/context";
+import {
+  ALERT_TYPE,
+  AlertNotificationRoot,
+  Toast,
+} from "react-native-alert-notification";
 
 import { useFetch } from "@/hooks";
 
-import { configDataEvents,EventItem } from "@/Storage";
-
+import { configDataEvents, EventItem, Events } from "@/Storage";
 
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
@@ -37,17 +40,17 @@ const Ads = () => {
 
   useEffect(() => {
     if (data && Array.isArray(data)) {
-      setData(() =>
-        data.map((item: any) => {
-          return configDataEvents(item);
-        })
+      setData(
+        () => data.map((item: any) => configDataEvents(item)) as EventItem[]
       );
     } else if (!isLoading && !data && error) {
       // If there is an error, show a message to the user
-      const errorMessage = getErrorMessageFromStatusCode(parseInt(error));
-      Alert.alert("خطاء", errorMessage, [
-        { text: "اعادة التسجيل", onPress: () => router.replace("./Welcome") },
-      ]);
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: "خطاء",
+        textBody: "يجب اعادة تسجيل الدخول",
+      });
+      router.replace("/Welcome");
     }
   }, [isLoading, data, error]);
 
@@ -57,18 +60,18 @@ const Ads = () => {
     // Assuming refetch updates the data
     if (data && !error) {
       if (Array.isArray(data)) {
-        setData(() =>
-          data.map((item: any) => {
-            return configDataEvents(item);
-          })
+        setData(
+          () => data.map((item: any) => configDataEvents(item)) as EventItem[]
         );
       }
     } else if (!isLoading && !data && error) {
       // If there is an error, show a message to the user
-      const errorMessage = getErrorMessageFromStatusCode(parseInt(error));
-      Alert.alert("خطاء", errorMessage, [
-        { text: "اعادة التسجيل", onPress: () => router.replace("./Welcome") },
-      ]);
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: "خطاء",
+        textBody: "يجب اعادة تسجيل الدخول",
+      });
+      router.replace("/Welcome");
     }
     setRefreshing(false);
   }, [data, error, refetch]);
@@ -79,15 +82,24 @@ const Ads = () => {
     return description;
   };
 
-  setData((prevData) => {
-    const sortedData = [...prevData].sort((a, b) => {
-      return sortUp ?
-        a.date_pub.valueOf() - b.date_pub.valueOf() :
-        b.date_pub.valueOf() - a.date_pub.valueOf();
+  const SortByPeriod = (isUp: boolean) => {
+    // Create a copy of Data to avoid mutating state directly
+    const sortedData = [...Data];
+
+    // Sort the copied array based on the desired criteria
+    sortedData.sort((a, b) => {
+      // Convert Date objects to numeric timestamps for comparison
+      const dateA = new Date(a.date_pub).getTime(); // Get milliseconds since the Unix Epoch
+      const dateB = new Date(b.date_pub).getTime(); // Get milliseconds since the Unix Epoch
+      return isUp ? dateB - dateA : dateA - dateB;
     });
+
+    // Toggle the sortUp state
     setSortUp((prevSortUp) => !prevSortUp);
-    return sortedData;
-  });
+
+    // Update the state with the sorted array
+    setData(sortedData);
+  };
   return (
     // <ScrollView
     //   refreshControl={
@@ -95,58 +107,60 @@ const Ads = () => {
     //   }
     //   contentContainerStyle={{ height: "100%" }}
     // >
-    <CartContainer>
-      <View className="bg-secondary">
-        <Header
-          title="الاعلانات"
-          left={{
-            icon: icons.menuDot,
-            onPress: () => navigator.dispatch(DrawerActions.openDrawer()),
-            size: 25,
-            backgroundColor: "#FF6600",
-          }}
-          right={{
-            icon: sortUp ? icons.sortUp : icons.sortDown ,
-            onPress: () => SortByPeriod(sortUp),
-            size: 25,
-            backgroundColor: "#FF6600",
-          }}
-          dark
-        />
-      </View>
-
-      <View className="flex-1 py-4">
-        <ScrollView
-          style={{
-            borderBottomLeftRadius: 55,
-            borderBottomRightRadius: 55,
-          }}
-          contentContainerStyle={{ paddingVertical: 50 * aspectRatio }}
-          showsVerticalScrollIndicator={false}
-        >
-          {Data.length > 0
-            ? Data.map((item, index) => (
-                <Cart
-                  image={item.photo[0]}
-                  title={item.Title}
-                  description={trimDescription(item.Description)}
-                  period={item.When}
-                  key={index.toString()}
-                />
-              ))
-            : null}
-        </ScrollView>
-
-        <View
-          style={{ width, height }}
-          className="absolute  top-0 left-0 right-0"
-        >
-          <Svg style={StyleSheet.absoluteFill} viewBox="0 0 375 100">
-            <Path d={d} fill={"#FF6600"} />
-          </Svg>
+    <AlertNotificationRoot>
+      <CartContainer>
+        <View className="bg-secondary">
+          <Header
+            title="الاعلانات"
+            left={{
+              icon: icons.menuDot,
+              onPress: () => navigator.dispatch(DrawerActions.openDrawer()),
+              size: 25,
+              backgroundColor: "#FF6600",
+            }}
+            right={{
+              icon: sortUp ? icons.sortUp : icons.sortDown,
+              onPress: () => SortByPeriod(!sortUp),
+              size: 25,
+              backgroundColor: "#FF6600",
+            }}
+            dark
+          />
         </View>
-      </View>
-    </CartContainer>
+
+        <View className="flex-1 py-4">
+          <ScrollView
+            style={{
+              borderBottomLeftRadius: 55,
+              borderBottomRightRadius: 55,
+            }}
+            contentContainerStyle={{ paddingVertical: 50 * aspectRatio }}
+            showsVerticalScrollIndicator={false}
+          >
+            {Data.length > 0
+              ? Data.map((item, index) => (
+                  <Cart
+                    image={item.photo[0]}
+                    title={item.Title}
+                    description={trimDescription(item.Description)}
+                    period={item.When}
+                    key={index.toString()}
+                  />
+                ))
+              : null}
+          </ScrollView>
+
+          <View
+            style={{ width, height }}
+            className="absolute  top-0 left-0 right-0"
+          >
+            <Svg style={StyleSheet.absoluteFill} viewBox="0 0 375 100">
+              <Path d={d} fill={"#FF6600"} />
+            </Svg>
+          </View>
+        </View>
+      </CartContainer>
+    </AlertNotificationRoot>
     // </ScrollView>
   );
 };
