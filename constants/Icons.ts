@@ -42,4 +42,5 @@ export default {
   sortUp: require("@/assets/icons/bars-sortUp.png"),
   sortDown: require("@/assets/icons/bars-sortDown.png"),
 
+  arrow : require("@/assets/icons/angle-small-right.png")
 };

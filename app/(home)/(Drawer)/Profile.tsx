@@ -34,7 +34,7 @@ const Profile = ({ ...props }) => {
     if (data) {
       setData(configDataInfoStudent(data));
       setFailedToLoadImage(false);
-    } else if (!isLoading || (!data && error)) {
+    } else if (!isLoading && error) {
       // // If there ts an error, show a message to the user
       // const errorMessage =
       // getErrorMessageFromStatusCode(parseint(error)) ;

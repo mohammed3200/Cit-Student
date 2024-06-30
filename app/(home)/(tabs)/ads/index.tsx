@@ -9,10 +9,10 @@ import {
 
 import { useFetch } from "@/hooks";
 
-import { configDataEvents, EventItem, Events } from "@/Storage";
+import { configDataEvents, EventItem } from "@/Storage";
 
 import { DrawerActions, useNavigation } from "@react-navigation/native";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 import React, { useCallback, useEffect, useState } from "react";
 import {
@@ -137,7 +137,17 @@ const Ads = () => {
                     title={item.Title}
                     description={trimDescription(item.Description)}
                     period={item.When}
-                    onPress={() => true}
+                    onPress={() =>
+                      router.replace({
+                        pathname: "ads/post",
+                        params: {
+                          image: item.photo,
+                          title: item.Title,
+                          description: item.Description,
+                          period: item.When,
+                        },
+                      })
+                    }
                     key={index.toString()}
                   />
                 ))

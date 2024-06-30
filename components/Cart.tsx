@@ -22,7 +22,7 @@ const Cart: React.FC<CartProps> = ({
     <View className="flex-row p-4 items-center">
       <View
         className="absolute bottom-2 left-3 bg-gray-200
-       justify-center items-center rounded-full p-3"
+       justify-center items-center rounded-full px-3 py-1"
       >
         <Text className="font-DNNextLT text-primary text-xs">{period}</Text>
       </View>
