@@ -13,7 +13,7 @@ const post = () => {
           title={title as string}
           left={{
             icon: icons.arrow,
-            onPress: () => router.replace("ads/index"),
+            onPress: () => router.replace("ads"),
             size:30,
             backgroundColor:"#F0F0F5"
           }}
