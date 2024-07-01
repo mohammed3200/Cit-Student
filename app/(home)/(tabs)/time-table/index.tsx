@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, RefreshControl } from "react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Header } from "@/components";
+import { CategoriesDay, Header } from "@/components";
 import Icons from "@/constants/Icons";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { router } from "expo-router";
@@ -119,6 +119,7 @@ const TimeTable = () => {
               }}
               className="bg-primary"
             >
+              <CategoriesDay />
               <ListOfCourses ref={ref}>
                 <View className="flex-row-reverse px-4">
                   <View className="w-1/4 text-wrap">

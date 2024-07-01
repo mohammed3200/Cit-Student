@@ -16,6 +16,9 @@ import Header from "./Header";
 import CartContainer from "./CartContainer";
 import Cart from "./Cart";
 import Background from "./Background";
+import CategoriesDay from "./CategoriesDay";
+import Day from "./Day"
+
 export {
   TabIcon,
   OnboardingItem,
@@ -36,4 +39,6 @@ export {
   CartContainer,
   Cart,
   Background,
+  CategoriesDay,
+  Day,
 };
