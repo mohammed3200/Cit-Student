@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, RefreshControl } from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Header } from "@/components";
 import Icons from "@/constants/Icons";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
@@ -13,7 +13,7 @@ import {
 } from "react-native-alert-notification";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Chase } from "react-native-animated-spinkit";
-import ListOfCourses from "./listOfCourses";
+import ListOfCourses, { ListOfCoursesRefProps } from "./listOfCourses";
 
 const TimeTable = () => {
   const navigation = useNavigation();
@@ -55,6 +55,16 @@ const TimeTable = () => {
     setRefreshing(false);
   }, [data, error, refetch]);
 
+  const ref = useRef<ListOfCoursesRefProps>(null);
+
+  const onPress = useCallback(() => {
+    const isActive = ref?.current?.isActive();
+    if (isActive) {
+      ref?.current?.scrollTo(0);
+    } else {
+      ref?.current?.scrollTo(-200);
+    }
+  }, []);
   return (
     <AlertNotificationRoot>
       <GestureHandlerRootView className="flex-1">
@@ -80,10 +90,7 @@ const TimeTable = () => {
                 }}
                 right={{
                   icon: Icons.menuDot,
-                  onPress: () =>
-                    router.replace({
-                      pathname: "time-table/listOfCourses",
-                    }),
+                  onPress: onPress,
                 }}
               />
               {isLoading ? (
@@ -109,7 +116,7 @@ const TimeTable = () => {
               }}
               className="bg-primary"
             >
-             <ListOfCourses/>
+              <ListOfCourses ref={ref} />
             </View>
           </View>
         </ScrollView>
