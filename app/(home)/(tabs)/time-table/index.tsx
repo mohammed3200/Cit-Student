@@ -4,15 +4,16 @@ import { Header } from "@/components";
 import Icons from "@/constants/Icons";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { router } from "expo-router";
-import { timeTableItem, timeTable } from "@/Storage";
+import { configDataTimeTable, timeTableItem } from "@/Storage";
 import { useFetch } from "@/hooks";
 import {
   ALERT_TYPE,
   AlertNotificationRoot,
   Toast,
 } from "react-native-alert-notification";
-import { configDataTimeTable } from "@/Storage";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Chase } from "react-native-animated-spinkit";
+import ListOfCourses from "./listOfCourses";
 
 const TimeTable = () => {
   const navigation = useNavigation();
@@ -56,63 +57,63 @@ const TimeTable = () => {
 
   return (
     <AlertNotificationRoot>
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        contentContainerStyle={{ height: "100%" }}
-      >
-        <View className="flex-1">
-          <View
-            style={{
-              flex: 0.25,
-            }}
-            className="bg-Bg rounded-b-[55px]"
-          >
-            <Header
-              title="جدول المحاضرات"
-              left={{
-                icon: Icons.Dot,
-                onPress: () => navigation.dispatch(DrawerActions.openDrawer()),
+      <GestureHandlerRootView className="flex-1">
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          contentContainerStyle={{ height: "100%" }}
+        >
+          <View className="flex-1">
+            <View
+              style={{
+                flex: 0.25,
               }}
-              right={{
-                icon: Icons.menuDot,
-                onPress: () =>
-                  router.replace({
-                    pathname: "time-table/listOfCourses",
-                    params: {
-                      CurrentCourseDates: Data?.CurrentCourseDates?.map(
-                        (item) => JSON.stringify(item)
-                      ),
-                    },
-                  }),
+              className="bg-Bg rounded-b-[55px]"
+            >
+              <Header
+                title="جدول المحاضرات"
+                left={{
+                  icon: Icons.Dot,
+                  onPress: () =>
+                    navigation.dispatch(DrawerActions.openDrawer()),
+                }}
+                right={{
+                  icon: Icons.menuDot,
+                  onPress: () =>
+                    router.replace({
+                      pathname: "time-table/listOfCourses",
+                    }),
+                }}
+              />
+              {isLoading ? (
+                <View className="flex-1 items-center justify-center">
+                  <Chase size={50} color="rgba(255,255,255,0.5)" />
+                </View>
+              ) : (
+                <View className="flex-1 justify-center px-4 py-3">
+                  <Text className="font-DNNextLTB text-lg text-primary">
+                    {" "}
+                    الفصل الحالي : {Data?.SemesterName}
+                  </Text>
+                  <Text className="font-DNNextLT text-base text-gray-300">
+                    {" "}
+                    الفصل الدراسي الحالي : {Data?.Semester}
+                  </Text>
+                </View>
+              )}
+            </View>
+            <View
+              style={{
+                flex: 0.7,
               }}
-            />
-            {isLoading ? (
-              <View className="flex-1 items-center justify-center">
-                <Chase size={50} color="rgba(255,255,255,0.5)" />
-              </View>
-            ) : (
-              <View className="flex-1 justify-center px-4 py-3">
-                <Text className="font-DNNextLTB text-lg text-primary">
-                  {" "}
-                  الفصل الحالي : {Data?.SemesterName}
-                </Text>
-                <Text className="font-DNNextLT text-base text-gray-300">
-                  {" "}
-                  الفصل الدراسي الحالي : {Data?.Semester}
-                </Text>
-              </View>
-            )}
+              className="bg-primary"
+            >
+             <ListOfCourses/>
+            </View>
           </View>
-          <View
-            style={{
-              flex: 0.7,
-            }}
-            className="bg-primary"
-          ></View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </GestureHandlerRootView>
     </AlertNotificationRoot>
   );
 };

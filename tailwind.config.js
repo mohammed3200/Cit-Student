@@ -25,6 +25,10 @@ module.exports = {
         },
         success: {
           DEFAULT: "#26b1a4",
+        },
+        lightGray : {
+          DEFAULT:"#d3d3d3", 
+
         }
       },
     },

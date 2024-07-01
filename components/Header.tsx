@@ -27,8 +27,8 @@ const Header: React.FC<HeaderProps> = ({
   dark = false,
 }) => {
   const insets = useSafeAreaInsets();
-  const color = dark ? "#13163e" : "#CDCDE0";
-  const backgroundColor = dark ? "#CDCDE0" : "#13163e";
+  const color = dark ? "#13163e" : "rgba(255,255,255,0.75)";
+  const backgroundColor = dark ? "rgba(255,255,255,0.75)" : "#13163e";
   return (
     <View
       className="flex-row justify-between px-2"
@@ -41,14 +41,14 @@ const Header: React.FC<HeaderProps> = ({
           backgroundColor: left.backgroundColor ?? backgroundColor,
         }}
         onPress={left.onPress}
-        className="items-center justify-center rounded-sm"
+        className="items-center justify-center rounded-md"
       >
         <Image
           source={left.icon}
           contentFit="contain"
           style={{
-            width: left.size ? left.size * 0.8 : 18,
-            height: left.size ? left.size * 0.8 : 18,
+            width: left.size ? left.size * 0.75 : 18,
+            height: left.size ? left.size * 0.75 : 18,
           }}
           tintColor={color}
         />
@@ -66,14 +66,14 @@ const Header: React.FC<HeaderProps> = ({
             backgroundColor: right.backgroundColor ?? backgroundColor,
           }}
           onPress={right.onPress}
-        className="items-center justify-center rounded-sm"
+        className="items-center justify-center rounded-md"
         >
           <Image
             source={right.icon}
             contentFit="contain"
             style={{
-              width: right.size ? right.size * 0.8 : 18,
-              height: right.size ? right.size * 0.8 : 18,
+              width: right.size ? right.size * 0.75 : 18,
+              height: right.size ? right.size * 0.75 : 18,
             }}
             tintColor={color}
           />
