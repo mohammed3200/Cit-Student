@@ -17,6 +17,7 @@ module.exports = {
           200: "#333333",
         },
         gray: {
+          DEFAULT: "#6B7280",
           100: "#CDCDE0",
           200: "rgba(47,46,65,0.8)",
         },
@@ -28,7 +29,6 @@ module.exports = {
         },
         lightGray : {
           DEFAULT:"#d3d3d3", 
-
         }
       },
     },

@@ -120,17 +120,72 @@ const TimeTable = () => {
               className="bg-primary"
             >
               <ListOfCourses ref={ref}>
+                <View className="flex-row-reverse px-4">
+                  <View className="w-1/4 text-wrap">
+                    <Text className="font-DNNextLTB text-base text-primary text-center">
+                      اسم المقرر الدراسي
+                    </Text>
+                  </View>
+                  <View className="w-1/4 text-wrap">
+                    <Text className="font-DNNextLTB text-base text-primary text-center">
+                      رمز المقرر الدراسي
+                    </Text>
+                  </View>
+                  <View className="w-1/4 text-wrap">
+                    <Text className="font-DNNextLTB text-base text-primary text-center">
+                      المجموعة النظري
+                    </Text>
+                  </View>
+                  <View className="w-1/4 text-wrap">
+                    <Text className="font-DNNextLTB text-base text-primary text-center">
+                      المجموعة العملي
+                    </Text>
+                  </View>
+                </View>
                 <ScrollView
-                  contentContainerStyle={{ height: "100%" }}
+                  contentContainerStyle={{
+                    height: "100%",
+                    alignItems: "center",
+                  }}
                   showsVerticalScrollIndicator={false}
+                  style={{ marginTop: 20 }}
                 >
                   {Data ? (
                     Data?.CurrentCourseDates?.map((item, index) => (
-                      <View className="flex-row-reverse p-4 justify-end items-center" key={index.toString()}>
-                        <Text className="font-DNNextLT text-lg text-primary">{item.NameCourse}</Text>
-                        <Text className="font-DNNextLT text-lg text-primary">{item.CodeCourse}</Text>
-                        <Text className="font-DNNextLT text-lg text-primary">{item.GroupTheoretical ?? ""}</Text>
-                        <Text className="font-DNNextLT text-lg text-primary">{item.GroupPractical ?? ""}</Text>
+                      <View
+                        className="w-full items-center"
+                        key={index.toString()}
+                      >
+                        <View className="w-full flex-row-reverse px-4 items-center">
+                          <View className="w-1/4 text-wrap">
+                            <Text className="font-DNNextLT text-lg text-black-200 text-center">
+                              {item.NameCourse}
+                            </Text>
+                          </View>
+                          <View className="w-1/4 text-wrap">
+                            <Text
+                              className="font-DNNextLT text-lg text-black-200 text-center"
+                              // How to reverse writing from left to right
+                              style={{ writingDirection: "rtl" }}
+                            >
+                              {item.CodeCourse}
+                            </Text>
+                          </View>
+                          <View className="w-1/4 text-wrap">
+                            <Text className="font-DNNextLT text-lg text-black-200 text-center">
+                              {item.GroupTheoretical ?? "-"}
+                            </Text>
+                          </View>
+                          <View className="w-1/4 text-wrap">
+                            <Text className="font-DNNextLT text-lg text-black-200 text-center">
+                              {item.GroupPractical ?? "-"}
+                            </Text>
+                          </View>
+                        </View>
+                        <View
+                          className="w-[90%] h-1 rounded-full px-2 my-2 bg-gray"
+                          key={Math.round(Math.random() * 100).toString()}
+                        />
                       </View>
                     ))
                   ) : (
