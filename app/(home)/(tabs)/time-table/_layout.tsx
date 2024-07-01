@@ -7,6 +7,7 @@ const ScheduleLayout = () => {
     <>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="listOfCourses" options={{ headerShown: false }} />
       </Stack>
     </>
   );

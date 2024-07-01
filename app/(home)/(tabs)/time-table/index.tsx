@@ -3,6 +3,7 @@ import React from "react";
 import { Header } from "@/components";
 import Icons from "@/constants/Icons";
 import { useNavigation,DrawerActions } from '@react-navigation/native';
+import { router } from "expo-router";
 
 const TimeTable = () => {
   const navigation = useNavigation()
@@ -22,7 +23,12 @@ const TimeTable = () => {
         }}
         right={{
           icon:Icons.menuDot,
-          onPress: () => true,
+          onPress: () => router.replace({
+            pathname: "listOfCourses",
+            params: {
+              id: 1,
+            },
+          }),
         }}
         />
       </View>

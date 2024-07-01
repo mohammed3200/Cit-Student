@@ -124,6 +124,9 @@ const Ads = () => {
 
         <View className="flex-1 py-4">
           <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             style={{
               borderBottomLeftRadius: 55,
               borderBottomRightRadius: 55,
