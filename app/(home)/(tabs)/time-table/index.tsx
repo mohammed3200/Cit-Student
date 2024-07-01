@@ -183,7 +183,7 @@ const TimeTable = () => {
                           </View>
                         </View>
                         <View
-                          className="w-[90%] h-1 rounded-full px-2 my-2 bg-gray"
+                          className="w-[90%] h-[2px] rounded-full px-2 my-2 bg-gray"
                           key={Math.round(Math.random() * 100).toString()}
                         />
                       </View>
