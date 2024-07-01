@@ -1,1 +1,1 @@
-export * from "./configDataTimeTable";
+export * from "./configDataTimeTable"
