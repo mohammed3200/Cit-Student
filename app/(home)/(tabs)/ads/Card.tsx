@@ -15,7 +15,7 @@ const width = wWidth * 0.75;
 const height = width * (425 / 294);
 
 interface CardProps {
-  positions: number;
+  positions: Animated.SharedValue<number>;
   source: string;
 }
 
@@ -38,9 +38,11 @@ const Card: React.FC<CardProps> = ({ positions, source }) => {
       );
     },
   });
-  const backgroundColor = mixColor(position.value, "#fac298", "#FF6600");
-  const translateY = mix(position.value, 0, -50);
-  const scale = mix(position.value, 1, 0.9);
+
+  const translateY = mix(position.value.value, 0, -50);
+  const scale = mix(position.value.value, 1, 0.9);
+  const backgroundColor = mixColor(position.value.value, "#fac298", "#FF6600") as string;
+  
 
   return (
     <>

@@ -4,6 +4,8 @@ import { router, useLocalSearchParams } from "expo-router";
 import { Background, Header } from "@/components";
 import { icons } from "@/constants";
 import Card from "./Card";
+import { BlurView } from "expo-blur";
+import { useSharedValue } from 'react-native-reanimated';
 
 const post = () => {
   const { image, title, description, period } = useLocalSearchParams();
@@ -20,11 +22,16 @@ const post = () => {
           }}
           dark
         />
+        <BlurView intensity={100} className="flex-1 px-4 py-2 rounded-xl">
+          <Text className="font-DNNextLT text-sm text-gray-200">
+            {description}
+          </Text>
+        </BlurView>
         <View className="flex-1">
           <Background />
-          <Card positions={1} source=""/>
-          <Card positions={0.5} source=""/>
-          <Card positions={0} source=""/>
+          <Card positions={useSharedValue(1)} source="" />
+          <Card positions={useSharedValue(0.5)} source="" />
+          <Card positions={useSharedValue(0)} source="" />
         </View>
       </View>
     </>
