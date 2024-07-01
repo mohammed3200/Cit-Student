@@ -1,7 +1,7 @@
-import { timeTable, timeTableItem, LectureDaysItems,CurrentCourseDateItem } from "../interfaces";
+import { timeTable, timeTableItem, LectureDaysItems } from "../interfaces";
 
 export const configDataTimeTable = (data: timeTable): timeTableItem => {
-    const CurrentCourseDates = data.CurrentCourseDates.map((item) => {
+    const CurrentCourseDates = data.CurrentCourseDates?.map((item) => {
         const GroupTheoretical = item.Lectures.filter(
           (Group) => Group.ClassRoom
         ).map((Group) => Group.Group);
@@ -17,7 +17,7 @@ export const configDataTimeTable = (data: timeTable): timeTableItem => {
         };
       });
 
-  const LectureDays = data.CurrentCourseDates.flatMap((course) =>
+  const LectureDays = data.CurrentCourseDates?.flatMap((course) =>
     course.Lectures.map((lecture) => ({
       Day: lecture.Day,
       CourseTeacher: lecture.CourseTeacher,
@@ -28,7 +28,7 @@ export const configDataTimeTable = (data: timeTable): timeTableItem => {
     }))
   );
 
-  const LectureDaysItems = LectureDays.reduce((acc, lecture) => {
+  const LectureDaysItems = LectureDays?.reduce((acc, lecture) => {
     const existingItem = acc.find((item) => item.Day === lecture.Day);
     if (existingItem) {
       existingItem.Hours.push(...lecture.Hours);
