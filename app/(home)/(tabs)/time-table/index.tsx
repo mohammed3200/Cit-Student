@@ -62,7 +62,7 @@ const TimeTable = () => {
     if (isActive) {
       ref?.current?.scrollTo(0);
     } else {
-      ref?.current?.scrollTo(-400);
+      ref?.current?.scrollTo(-350);
     }
   }, []);
 
@@ -91,7 +91,7 @@ const TimeTable = () => {
                 }}
                 right={{
                   icon: Icons.menuDot,
-                  onPress: () => onPressList,
+                  onPress: onPressList,
                 }}
               />
               {isLoading ? (
