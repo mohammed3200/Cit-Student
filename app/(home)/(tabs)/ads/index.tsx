@@ -153,8 +153,8 @@ const Ads = () => {
                 />
               ))
             ) : (
-              <View className="flex-1 w-full h-full items-center justify-self-center">
-                <Chase size={80} color="#333333" />
+              <View className="flex-1 w-full h-full items-center justify-center">
+                <Chase size={100} color="#333333" />
               </View>
             )}
           </ScrollView>

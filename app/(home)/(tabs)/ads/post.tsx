@@ -1,14 +1,16 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { router, useLocalSearchParams } from "expo-router";
-import { Header } from "@/components";
+import { Background, Header } from "@/components";
 import { icons } from "@/constants";
 
 const post = () => {
   const { image, title, description, period } = useLocalSearchParams();
   return (
     <>
-      <View>
+      <View
+      className="flex-1 bg-primary"
+      >
         <Header
           title={title as string}
           left={{
@@ -19,6 +21,13 @@ const post = () => {
           }}
           dark
         />
+        <View
+        className="flex-1"
+        >
+            <Background/>
+        </View>
+
+
       </View>
     </>
   );

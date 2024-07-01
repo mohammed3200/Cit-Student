@@ -14,7 +14,8 @@ import AnimatedStroke from "./AnimatedStroke";
 import DrawerItem, { DrawerItemProps } from "./DrawerItem";
 import Header from "./Header";
 import CartContainer from "./CartContainer";
-import Cart from "./Cart"
+import Cart from "./Cart";
+import Background from "./Background";
 export {
   TabIcon,
   OnboardingItem,
@@ -34,4 +35,5 @@ export {
   Header,
   CartContainer,
   Cart,
+  Background,
 };
