@@ -57,14 +57,15 @@ const TimeTable = () => {
 
   const ref = useRef<ListOfCoursesRefProps>(null);
 
-  const onPress = useCallback(() => {
+  const onPressList = useCallback(() => {
     const isActive = ref?.current?.isActive();
     if (isActive) {
       ref?.current?.scrollTo(0);
     } else {
-      ref?.current?.scrollTo(-200);
+      ref?.current?.scrollTo(-400);
     }
   }, []);
+
   return (
     <AlertNotificationRoot>
       <GestureHandlerRootView className="flex-1">
@@ -90,7 +91,7 @@ const TimeTable = () => {
                 }}
                 right={{
                   icon: Icons.menuDot,
-                  onPress: onPress,
+                  onPress: () => onPressList,
                 }}
               />
               {isLoading ? (
