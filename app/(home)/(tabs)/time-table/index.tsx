@@ -12,6 +12,7 @@ import {
   Toast,
 } from "react-native-alert-notification";
 import { configDataTimeTable } from "@/Storage";
+import { Chase } from "react-native-animated-spinkit";
 
 const TimeTable = () => {
   const navigation = useNavigation();
@@ -64,7 +65,7 @@ const TimeTable = () => {
         <View className="flex-1">
           <View
             style={{
-              flex: 0.2,
+              flex: 0.25,
             }}
             className="bg-Bg rounded-b-[55px]"
           >
@@ -78,7 +79,7 @@ const TimeTable = () => {
                 icon: Icons.menuDot,
                 onPress: () =>
                   router.replace({
-                    pathname: "listOfCourses",
+                    pathname: "time-table/listOfCourses",
                     params: {
                       CurrentCourseDates: Data?.CurrentCourseDates?.map(
                         (item) => JSON.stringify(item)
@@ -87,18 +88,23 @@ const TimeTable = () => {
                   }),
               }}
             />
-            <View className="flex-1 justify-center px-4">
-              <Text className="font-DNNextLTB text-lg text-primary">
-                {" "}
-                الفصل الحالي : {Data?.SemesterName}
-              </Text>
-              <Text className="font-DNNextLT text-base text-gray-300">
-                {" "}
-                الفصل الدراسي الحالي : {Data?.Semester}
-              </Text>
-            </View>
+            {isLoading ? (
+              <View className="flex-1 items-center justify-center">
+                <Chase size={50} color="rgba(255,255,255,0.5)" />
+              </View>
+            ) : (
+              <View className="flex-1 justify-center px-4 py-3">
+                <Text className="font-DNNextLTB text-lg text-primary">
+                  {" "}
+                  الفصل الحالي : {Data?.SemesterName}
+                </Text>
+                <Text className="font-DNNextLT text-base text-gray-300">
+                  {" "}
+                  الفصل الدراسي الحالي : {Data?.Semester}
+                </Text>
+              </View>
+            )}
           </View>
-
           <View
             style={{
               flex: 0.7,
