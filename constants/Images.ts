@@ -13,4 +13,6 @@ export default {
     require("@/assets/images/bg-pattern/3.png"),
     require("@/assets/images/bg-pattern/4.png"),
   ] // Explicitly required SVG images
+,
+  undraw_empty: require("@/assets/images/undraw_empty.svg")
 };

@@ -14,6 +14,8 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Chase } from "react-native-animated-spinkit";
 import ListOfCourses, { ListOfCoursesRefProps } from "./listOfCourses";
+import { Image } from "expo-image";
+import { Images } from "@/constants";
 
 const TimeTable = () => {
   const navigation = useNavigation();
@@ -117,7 +119,39 @@ const TimeTable = () => {
               }}
               className="bg-primary"
             >
-              <ListOfCourses ref={ref} />
+              <ListOfCourses ref={ref}>
+                <ScrollView
+                  contentContainerStyle={{ height: "100%" }}
+                  showsVerticalScrollIndicator={false}
+                >
+                  {Data ? (
+                    Data?.CurrentCourseDates?.map((item, index) => (
+                      <View className="flex-row-reverse p-4 justify-end items-center" key={index.toString()}>
+                        <Text className="font-DNNextLT text-lg text-primary">{item.NameCourse}</Text>
+                        <Text className="font-DNNextLT text-lg text-primary">{item.CodeCourse}</Text>
+                        <Text className="font-DNNextLT text-lg text-primary">{item.GroupTheoretical ?? ""}</Text>
+                        <Text className="font-DNNextLT text-lg text-primary">{item.GroupPractical ?? ""}</Text>
+                      </View>
+                    ))
+                  ) : (
+                    <View
+                      className="flex-1 absolute top-10 right-0 left-0
+                    justify-center items-center
+                    p-8
+                    "
+                    >
+                      <Image
+                        source={Images.undraw_empty}
+                        contentFit="contain"
+                        className="w-52 h-52"
+                      />
+                      <Text className="font-DNNextLT text-lg text-black-200 text-center mt-6">
+                        لا يوجد مواد في الوقت الحالي
+                      </Text>
+                    </View>
+                  )}
+                </ScrollView>
+              </ListOfCourses>
             </View>
           </View>
         </ScrollView>
