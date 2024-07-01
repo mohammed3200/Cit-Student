@@ -1,12 +1,39 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "@/components";
 import Icons from "@/constants/Icons";
 import { useNavigation,DrawerActions } from '@react-navigation/native';
 import { router } from "expo-router";
+import { timeTableItem,timeTable } from "@/Storage";
+import { useFetch } from "@/hooks";
+import {
+  ALERT_TYPE,
+  AlertNotificationRoot,
+  Toast,
+} from "react-native-alert-notification";
+import { configDataTimeTable } from "@/Storage";
+
 
 const TimeTable = () => {
   const navigation = useNavigation()
+  const [refreshing, setRefreshing] = useState(false);
+  const [Data, setData] = useState<timeTableItem>(); // useState is initialized with an empty array
+  const { data, isLoading, error, refetch } = useFetch("/student/timetable");
+
+  useEffect(() => {
+    if (data) {
+      setData(
+        () => configDataTimeTable(data) as timeTableItem
+      )
+    } else if (!isLoading && !data && error) {
+      // If there is an error, show a message to the user
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: "خطاء",
+        textBody: "يجب اعادة تسجيل الدخول",
+      });
+      router.replace("/Welcome");
+    }},[])
   return (
     <View className="flex-1">
       <View
@@ -26,9 +53,9 @@ const TimeTable = () => {
           onPress: () => router.replace({
             pathname: "listOfCourses",
             params: {
-              id: 1,
+              CurrentCourseDates: Data?.CurrentCourseDates?.map((item) => JSON.stringify(item)),
             },
-          }),
+          })
         }}
         />
       </View>
