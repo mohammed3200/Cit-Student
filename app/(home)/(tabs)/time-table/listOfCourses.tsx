@@ -1,5 +1,5 @@
 import { Dimensions, View } from "react-native";
-import React, { useCallback, useEffect, useImperativeHandle } from "react";
+import React, { useCallback, useImperativeHandle } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   Extrapolate,
@@ -8,12 +8,10 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-import { Background } from "@/components";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 const MAX_TRANSLATE_Y = -SCREEN_HEIGHT + 50;
-
 type ListOfCoursesProps = {
   children?: React.ReactNode;
 };
@@ -80,14 +78,13 @@ const ListOfCourses = React.forwardRef<
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View
-        className="w-full bg-lightGray absolute rounded-[35px]"
+        className="w-full bg-lightGray absolute rounded-[35px] overflow-hidden"
         style={[
           { height: SCREEN_HEIGHT, top: SCREEN_HEIGHT },
           rBottomSheetStyle,
         ]}
       >
-        <Background backgroundColor="#d3d3d3" />
-        <View className="w-12 h-1 bg-gray-200 self-center my-4 rounded-full" />
+        <View className="w-12 h-1 bg-gray-200 self-center my-2 rounded-full" />
         {children}
       </Animated.View>
     </GestureDetector>

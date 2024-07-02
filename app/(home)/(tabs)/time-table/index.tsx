@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, RefreshControl } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  RefreshControl,
+  Dimensions,
+  StyleSheet,
+} from "react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CategoriesDay, Header } from "@/components";
 import Icons from "@/constants/Icons";
@@ -16,6 +23,12 @@ import { Chase } from "react-native-animated-spinkit";
 import ListOfCourses, { ListOfCoursesRefProps } from "./listOfCourses";
 import { Image } from "expo-image";
 import { Images } from "@/constants";
+import Svg, { Path } from "react-native-svg";
+
+const { width } = Dimensions.get("window");
+const aspectRatio = width / 375;
+const height = 100 * aspectRatio;
+const d = "M 0 0 A 50 50 0 0 0 50 50 H 325 A 50 50 0 0 1 375 100 V 0 Z";
 
 const TimeTable = () => {
   const navigation = useNavigation();
@@ -120,93 +133,106 @@ const TimeTable = () => {
               className="bg-primary"
             >
               <CategoriesDay />
+
               <ListOfCourses ref={ref}>
-                <View className="flex-row-reverse px-4">
-                  <View className="w-1/4 text-wrap">
-                    <Text className="font-DNNextLTB text-base text-primary text-center">
-                      اسم المقرر الدراسي
-                    </Text>
+                <View className="flex-1">
+                  <View className="flex-row-reverse px-4 z-10">
+                    <View className="w-1/4 text-wrap">
+                      <Text className="font-DNNextLTB text-sm text-primary text-center">
+                        اسم المقرر الدراسي
+                      </Text>
+                    </View>
+                    <View className="w-1/4 text-wrap">
+                      <Text className="font-DNNextLTB text-sm text-primary text-center">
+                        رمز المقرر الدراسي
+                      </Text>
+                    </View>
+                    <View className="w-1/4 text-wrap">
+                      <Text className="font-DNNextLTB text-sm text-primary text-center">
+                        المجموعة النظري
+                      </Text>
+                    </View>
+                    <View className="w-1/4 text-wrap">
+                      <Text className="font-DNNextLTB text-sm text-primary text-center">
+                        المجموعة العملي
+                      </Text>
+                    </View>
                   </View>
-                  <View className="w-1/4 text-wrap">
-                    <Text className="font-DNNextLTB text-base text-primary text-center">
-                      رمز المقرر الدراسي
-                    </Text>
+                  <View
+                    style={{ width, height }}
+                    className="absolute top-0 left-0 right-0"
+                  >
+                    <Svg style={StyleSheet.absoluteFill} viewBox="0 0 375 100">
+                      <Path d={d} fill={"#f67d38"} />
+                    </Svg>
                   </View>
-                  <View className="w-1/4 text-wrap">
-                    <Text className="font-DNNextLTB text-base text-primary text-center">
-                      المجموعة النظري
-                    </Text>
-                  </View>
-                  <View className="w-1/4 text-wrap">
-                    <Text className="font-DNNextLTB text-base text-primary text-center">
-                      المجموعة العملي
-                    </Text>
-                  </View>
-                </View>
-                <ScrollView
-                  contentContainerStyle={{
-                    height: "100%",
-                    alignItems: "center",
-                  }}
-                  showsVerticalScrollIndicator={false}
-                  style={{ marginTop: 20 }}
-                >
-                  {Data ? (
-                    Data?.CurrentCourseDates?.map((item, index) => (
-                      <View
-                        className="w-full items-center"
-                        key={index.toString()}
-                      >
-                        <View className="w-full flex-row-reverse px-4 items-center">
-                          <View className="w-1/4 text-wrap">
-                            <Text className="font-DNNextLT text-lg text-black-200 text-center">
-                              {item.NameCourse}
-                            </Text>
-                          </View>
-                          <View className="w-1/4 text-wrap">
-                            <Text
-                              className="font-DNNextLT text-lg text-black-200 text-center"
-                              // How to reverse writing from left to right
-                              style={{ writingDirection: "rtl" }}
-                            >
-                              {item.CodeCourse}
-                            </Text>
-                          </View>
-                          <View className="w-1/4 text-wrap">
-                            <Text className="font-DNNextLT text-lg text-black-200 text-center">
-                              {item.GroupTheoretical ?? "-"}
-                            </Text>
-                          </View>
-                          <View className="w-1/4 text-wrap">
-                            <Text className="font-DNNextLT text-lg text-black-200 text-center">
-                              {item.GroupPractical ?? "-"}
-                            </Text>
-                          </View>
-                        </View>
+
+                  <ScrollView
+                    contentContainerStyle={{
+                      height: "100%",
+                      alignItems: "center",
+                    }}
+                    showsVerticalScrollIndicator={false}
+                    style={{ marginTop: 20 }}
+                  >
+                    {Data ? (
+                      Data?.CurrentCourseDates?.map((item, index) => (
                         <View
-                          className="w-[90%] h-[2px] rounded-full px-2 my-2 bg-gray"
-                          key={Math.round(Math.random() * 100).toString()}
-                        />
-                      </View>
-                    ))
-                  ) : (
-                    <View
-                      className="flex-1 absolute top-10 right-0 left-0
+                          className="w-full items-center"
+                          key={index.toString()}
+                        >
+                          <View className="w-full flex-row-reverse px-4 items-center">
+                            <View className="w-1/4 text-wrap">
+                              <Text className="font-DNNextLT text-lg text-black-200 text-center">
+                                {item.NameCourse}
+                              </Text>
+                            </View>
+                            <View className="w-1/4 text-wrap">
+                              <Text
+                                className="font-DNNextLT text-lg text-black-200 text-center"
+                                // How to reverse writing from left to right
+                                style={{ writingDirection: "rtl" }}
+                              >
+                                {item.CodeCourse}
+                              </Text>
+                            </View>
+                            <View className="w-1/4 text-wrap">
+                              <Text className="font-DNNextLT text-lg text-black-200 text-center">
+                                {item.GroupTheoretical ?? "-"}
+                              </Text>
+                            </View>
+                            <View className="w-1/4 text-wrap">
+                              <Text className="font-DNNextLT text-lg text-black-200 text-center">
+                                {item.GroupPractical ?? "-"}
+                              </Text>
+                            </View>
+                          </View>
+                          <View
+                            className="w-[90%] h-[2px] rounded-full px-2 my-2 bg-gray"
+                            key={Math.round(Math.random() * 100).toString()}
+                          />
+                        </View>
+                      ))
+                    ) : (
+                      <View
+                        className="flex-1 absolute top-10 right-0 left-0
                     justify-center items-center
                     p-8
                     "
-                    >
-                      <Image
-                        source={Images.undraw_empty}
-                        contentFit="contain"
-                        className="w-52 h-52"
-                      />
-                      <Text className="font-DNNextLT text-lg text-black-200 text-center mt-6">
-                        لا يوجد مواد في الوقت الحالي
-                      </Text>
-                    </View>
-                  )}
-                </ScrollView>
+                      >
+                        <Image
+                          source={Images.undraw_empty}
+                          contentFit="contain"
+                          className="w-52 h-52"
+                        />
+                        <Text className="font-DNNextLT text-lg text-black-200 text-center mt-6">
+                          لا يوجد مواد في الوقت الحالي
+                        </Text>
+                      </View>
+                    )}
+                  </ScrollView>
+                  
+                </View>
               </ListOfCourses>
             </View>
           </View>

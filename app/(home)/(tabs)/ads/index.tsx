@@ -121,7 +121,6 @@ const Ads = () => {
             }}
           />
         </View>
-
         <View className="flex-1 py-4">
           <ScrollView
             refreshControl={
