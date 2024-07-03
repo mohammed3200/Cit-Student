@@ -22,9 +22,6 @@ const CoursesPage = () => {
   useEffect(() => {
     if (data) {
       setData(() => data?.Courses);
-      console.log('====================================');
-      console.log(Data);
-      console.log('====================================');
     } else if (!isLoading && !data && error) {
       // If there is an error, show a message to the user
       Toast.show({
