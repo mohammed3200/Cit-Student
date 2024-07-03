@@ -31,6 +31,7 @@ import { Image } from "expo-image";
 import { Images } from "@/constants";
 import Svg, { Path } from "react-native-svg";
 import { useSharedValue } from "react-native-reanimated";
+import moment from "moment";
 
 const { width } = Dimensions.get("window");
 const aspectRatio = width / 375;
@@ -55,8 +56,9 @@ const TimeTable = () => {
     (day: { code: string; name: string; isActive: boolean }) => {
       setSelectedDay(day.code);
       setSelectedDayName(day.name);
-      setLecturesDay(Data?.LectureDays.filter((item) => day.name === item.Day));
+      setLecturesDay(Data?.LectureDays?.filter((item) => day.name === item.Day));
     },
+  
     [Data]
   );
 
@@ -96,12 +98,24 @@ const TimeTable = () => {
 
   useEffect(() => {
     if (Data) {
-      setLecturesDay(
-        Data.LectureDays?.filter((item) => selectedDayName === item.Day)
-      );
-      console.log('====================================');
-      console.log(LecturesDay);
-      console.log('====================================');
+      const sortedLectureDays = Data.LectureDays?.filter((item) => selectedDayName === item.Day)?.sort((a, b) => {
+        const [aStartTime, aEndTime] = a.Hours[0].TimeFromTo.split('-').map((time) => moment(time.trim(), 'h:mm'));
+        const [bStartTime, bEndTime] = b.Hours[0].TimeFromTo.split('-').map((time) => moment(time.trim(), 'h:mm'));
+        if (aStartTime.isBefore(bStartTime)) {
+          return -1;
+        } else if (aStartTime.isAfter(bStartTime)) {
+          return 1;
+        } else {
+          if (aEndTime.isBefore(bEndTime)) {
+            return -1;
+          } else if (aEndTime.isAfter(bEndTime)) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      });
+      setLecturesDay(sortedLectureDays);
     }
   }, [selectedDay, Data]);
 
@@ -177,12 +191,12 @@ const TimeTable = () => {
                 onViewableItemsChanged={({ viewableItems: vItems }) => {
                   viewableItems.value = vItems;
                 }}
-                renderItem={({ item }) => {
+                renderItem={({ item,index }) => {
                   return (
                     <ListItem
                       viewableItems={viewableItems}
                       item={item}
-                      key={Math.round(Math.random() * 1000).toString()}
+                      key={index.toString()}
                     />
                   );
                 }}

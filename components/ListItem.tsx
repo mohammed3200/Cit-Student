@@ -18,7 +18,6 @@ const ListItem: React.FC<ListItemProps> = React.memo(
         .filter((item) => item.isViewable)
         .find((viewableItems) => viewableItems.item === item)
     );
-
     const rStyle = useAnimatedStyle(() => {
       return {
         opacity: withTiming(isVisible ? 1 : 0),
@@ -32,21 +31,57 @@ const ListItem: React.FC<ListItemProps> = React.memo(
 
     return (
       <Animated.View
-        className="h-20 w-[90%] self-center rounded-lg mt-5"
-        style={[
-          {
-            backgroundColor: "#78CAD2",
-          },
-          rStyle,
-        ]}
+        className="h-fit w-[90%] self-center rounded-lg mt-2"
+        style={
+          [
+            //   rStyle,
+          ]
+        }
       >
-        <View className="flex-row items-center">
-          <Text>{item?.NameCourse}</Text>
-          <Text>{item?.CourseTeacher}</Text>
-          <Text>{item?.Group}</Text>
-          {item?.ClassRoom && <Text>{item?.ClassRoom}</Text>}
-          {item?.Lab && <Text>{item?.Lab}</Text>}
-          {item?.Hours?.map((hour)=><Text>{hour.TimeFromTo}</Text>)}
+        <View
+          className="flex-row h-fit w-[90%] rounded-lg self-center justify-between px-2 py-1"
+          style={{
+            backgroundColor: "#78CAD2",
+          }}
+        >
+          <View className="justify-self-start">
+            <Text>{item?.Hours[0]?.TimeFromTo.split("-")[1]}</Text>
+          </View>
+
+          <View className="justify-self-end">
+            <Text>
+              {
+                item?.Hours[item.Hours.length - 1]?.TimeFromTo.split(
+                  "-"
+                ).reverse()[
+                  item?.Hours[item.Hours.length - 1]?.TimeFromTo.split("-")
+                    .length - 1
+                ]
+              }
+            </Text>
+          </View>
+        </View>
+
+        <View className="flex-row-reverse items-center justify-between px-2">
+          <View className="justify-center">
+            <Text className="font-DNNextLT text-lg text-right text-black-200">
+              {item?.NameCourse}
+            </Text>
+            <Text className="font-DNNextLT text-base text-right text-black-200">
+              {item?.CourseTeacher}
+            </Text>
+          </View>
+          <View className="justify-center">
+            <Text className="font-DNNextLT text-base">
+              رقم المجموعة {item?.Group}{" "}
+            </Text>
+            {item?.ClassRoom && (
+              <Text className="font-DNNextLT text-base">{item?.ClassRoom}</Text>
+            )}
+            {item?.Lab && (
+              <Text className="font-DNNextLT text-base">{item?.Lab}</Text>
+            )}
+          </View>
         </View>
       </Animated.View>
     );
