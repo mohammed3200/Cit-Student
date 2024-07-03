@@ -1,6 +1,6 @@
 import { View, Text, ViewToken, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Header } from "@/components";
+import { Header, ListItemCourse } from "@/components";
 import Icons from "@/constants/Icons";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { useFetch } from "@/hooks";
@@ -13,7 +13,7 @@ import {
 } from "react-native-alert-notification";
 import { router } from "expo-router";
 
-const Courses = () => {
+const CoursesPage = () => {
   const navigation = useNavigation();
   const [Data, setData] = useState<Course[]>([]); // useState is initialized with an empty array
   const { data, isLoading, error, refetch } = useFetch("/student/courses");
@@ -22,6 +22,9 @@ const Courses = () => {
   useEffect(() => {
     if (data) {
       setData(() => data?.Courses);
+      console.log('====================================');
+      console.log(Data);
+      console.log('====================================');
     } else if (!isLoading && !data && error) {
       // If there is an error, show a message to the user
       Toast.show({
@@ -34,7 +37,7 @@ const Courses = () => {
   }, [isLoading, data, error]);
 
   return (
-    <View className="w-full h-full flex-1 justify-center items-center">
+    <View className="flex-1">
       <Header
         title="المقررات الدراسية"
         left={{
@@ -43,7 +46,7 @@ const Courses = () => {
         }}
         dark
       />
-      {Data.length > 0 ? (
+      {Data && Data?.length > 0 ? (
         <FlatList
           data={Data}
           showsHorizontalScrollIndicator={false}
@@ -52,7 +55,13 @@ const Courses = () => {
             viewableItems.value = vItems;
           }}
           renderItem={({ item, index }) => {
-            return <View></View>;
+            return (
+              <ListItemCourse
+                viewableItems={viewableItems}
+                item={item}
+                key={index.toString()}
+              />
+            );
           }}
         />
       ) : null}
@@ -60,4 +69,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default CoursesPage;
