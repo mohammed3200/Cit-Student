@@ -15,5 +15,5 @@ export default {
   ] // Explicitly required SVG images
 ,
   undraw_empty: require("@/assets/images/undraw_empty.svg"),
-  undraw_holiDay: require("@/assets/images/undraw_holilyDay.svg"),
+  undraw_holiDay: require("@/assets/images/undraw_holiDay.svg"),
 };

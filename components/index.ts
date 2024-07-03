@@ -17,7 +17,8 @@ import CartContainer from "./CartContainer";
 import Cart from "./Cart";
 import Background from "./Background";
 import CategoriesDay from "./CategoriesDay";
-import Day from "./Day"
+import Day from "./Day";
+import ListItem from "./ListItem";
 
 export {
   TabIcon,
@@ -41,4 +42,5 @@ export {
   Background,
   CategoriesDay,
   Day,
+  ListItem,
 };

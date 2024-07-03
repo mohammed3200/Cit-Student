@@ -58,6 +58,7 @@
     "react-native-vector-icons": "^10.1.0",
     "react-native-web": "~0.19.10",
     "react-navigation-stack": "react-navigation/stack",
+    "shopify": "^0.1.0",
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {

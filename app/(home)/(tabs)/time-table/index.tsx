@@ -5,13 +5,19 @@ import {
   RefreshControl,
   Dimensions,
   StyleSheet,
+  FlatList,
+  ViewToken,
 } from "react-native";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { CategoriesDay, Header } from "@/components";
+import { CategoriesDay, Header, ListItem } from "@/components";
 import Icons from "@/constants/Icons";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { router } from "expo-router";
-import { configDataTimeTable, timeTableItem } from "@/Storage";
+import {
+  LectureDaysItems,
+  configDataTimeTable,
+  timeTableItem,
+} from "@/Storage";
 import { useFetch } from "@/hooks";
 import {
   ALERT_TYPE,
@@ -24,6 +30,7 @@ import ListOfCourses, { ListOfCoursesRefProps } from "./listOfCourses";
 import { Image } from "expo-image";
 import { Images } from "@/constants";
 import Svg, { Path } from "react-native-svg";
+import { useSharedValue } from "react-native-reanimated";
 
 const { width } = Dimensions.get("window");
 const aspectRatio = width / 375;
@@ -35,12 +42,23 @@ const TimeTable = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [Data, setData] = useState<timeTableItem>(); // useState is initialized with an empty array
   const { data, isLoading, error, refetch } = useFetch("/student/timetable");
-  const [selectedDay, setSelectedDay] = useState<string>('س ب');
+  const [selectedDay, setSelectedDay] = useState<string>("س ب");
+  const [LecturesDay, setLecturesDay] = useState<
+    LectureDaysItems[] | undefined | null
+  >([]);
 
-  const handleDayPress = useCallback((day: { code: string; name: string; isActive: boolean }) => {
-    setSelectedDay(day.code);
-    // Implement your logic to filter the courses based on the selected day
-  }, []);
+  const viewableItems = useSharedValue<ViewToken[]>([]);
+
+  const handleDayPress = useCallback(
+    (day: { code: string; name: string; isActive: boolean }) => {
+      setSelectedDay(day.code);
+      setLecturesDay(
+        Data?.LectureDays.filter((item) => selectedDay === item.Day)
+      );
+      // Implement your logic to filter the courses based on the selected day
+    },
+    []
+  );
 
   useEffect(() => {
     if (data) {
@@ -138,7 +156,42 @@ const TimeTable = () => {
               }}
               className="bg-primary"
             >
-              <CategoriesDay selectedDay={selectedDay} onDayPress={handleDayPress} />
+              <CategoriesDay
+                selectedDay={selectedDay}
+                onDayPress={handleDayPress}
+              />
+              {LecturesDay ? (
+                <FlatList
+                  data={LecturesDay}
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={{ paddingTop: 40 }}
+                  onViewableItemsChanged={({ viewableItems: vItems }) => {
+                    viewableItems.value = vItems;
+                  }}
+                  renderItem={({ item }) => {
+                    return (
+                      <ListItem
+                        viewableItems={viewableItems}
+                        item={item}
+                        key={Math.round(Math.random() * 1000).toString()}
+                      />
+                    );
+                  }}
+                />
+              ) : (
+                <View className="flex-1 justify-center items-center p-5">
+                  <Image
+                    source={Images.undraw_holiDay}
+                    contentFit="contain"
+                    className="w-[85%] h-[85%]"
+                  />
+                  <Text
+                  className="font-DNNextLTB text-lg text-gray-200"
+                  >
+                    لا يوجد محاضرات لليوم
+                  </Text>
+                </View>
+              )}
 
               <ListOfCourses ref={ref}>
                 <View className="flex-1">
@@ -237,7 +290,6 @@ const TimeTable = () => {
                       </View>
                     )}
                   </ScrollView>
-                  
                 </View>
               </ListOfCourses>
             </View>
