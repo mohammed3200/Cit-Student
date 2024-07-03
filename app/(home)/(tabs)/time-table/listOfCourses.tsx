@@ -78,14 +78,18 @@ const ListOfCourses = React.forwardRef<
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View
-        className="w-full bg-lightGray absolute rounded-[35px] overflow-hidden"
+        className="w-full bg-secondary-100 absolute rounded-[35px] overflow-hidden"
         style={[
           { height: SCREEN_HEIGHT, top: SCREEN_HEIGHT },
           rBottomSheetStyle,
         ]}
       >
         <View className="w-12 h-1 bg-gray-200 self-center my-2 rounded-full" />
+        <View
+        className="w-full flex-1 bg-primary"
+        >
         {children}
+        </View>
       </Animated.View>
     </GestureDetector>
   );
