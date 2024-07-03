@@ -43,6 +43,7 @@ const TimeTable = () => {
   const [Data, setData] = useState<timeTableItem>(); // useState is initialized with an empty array
   const { data, isLoading, error, refetch } = useFetch("/student/timetable");
   const [selectedDay, setSelectedDay] = useState<string>("س ب");
+  const [selectedDayName, setSelectedDayName] = useState<string>("");
   const [LecturesDay, setLecturesDay] = useState<
     LectureDaysItems[] | undefined | null
   >([]);
@@ -53,7 +54,8 @@ const TimeTable = () => {
   const handleDayPress = useCallback(
     (day: { code: string; name: string; isActive: boolean }) => {
       setSelectedDay(day.code);
-      setLecturesDay(Data?.LectureDays.filter((item) => day.code === item.Day));
+      setSelectedDayName(day.name);
+      setLecturesDay(Data?.LectureDays.filter((item) => day.name === item.Day));
     },
     [Data]
   );
@@ -95,8 +97,11 @@ const TimeTable = () => {
   useEffect(() => {
     if (Data) {
       setLecturesDay(
-        Data.LectureDays.filter((item) => selectedDay === item.Day)
+        Data.LectureDays?.filter((item) => selectedDayName === item.Day)
       );
+      console.log('====================================');
+      console.log(LecturesDay);
+      console.log('====================================');
     }
   }, [selectedDay, Data]);
 
@@ -164,7 +169,7 @@ const TimeTable = () => {
               selectedDay={selectedDay}
               onDayPress={handleDayPress}
             />
-            {LecturesDay ? (
+            {LecturesDay && LecturesDay?.length > 0 ? (
               <FlatList
                 data={LecturesDay}
                 showsHorizontalScrollIndicator={false}
@@ -189,7 +194,7 @@ const TimeTable = () => {
                   contentFit="contain"
                   className="w-[85%] h-[85%]"
                 />
-                <Text className="font-DNNextLTB text-lg text-gray-200">
+                <Text className="font-DNNextLTB text-lg text-gray-200 mt-3">
                   لا يوجد محاضرات لليوم
                 </Text>
               </View>
