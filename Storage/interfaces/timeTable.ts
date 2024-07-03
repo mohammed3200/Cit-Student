@@ -37,10 +37,11 @@ export interface CurrentCourseDateItem {
   GroupPractical?: number | null;
 }
 export interface LectureDaysItems {
-    Day: string;
-    CourseTeacher: string;
-    ClassRoom?: string;
-    Hours: Hour[];
-    Group: number;
-    Lab?: string;
+  Day: string;
+  NameCourse: string;
+  CourseTeacher: string;
+  ClassRoom?: string;
+  Hours: Hour[];
+  Group: number;
+  Lab?: string;
 }

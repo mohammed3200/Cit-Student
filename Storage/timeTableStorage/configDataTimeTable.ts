@@ -19,6 +19,7 @@ export const configDataTimeTable = (data: timeTable): timeTableItem => {
 
   const LectureDays = data.CurrentCourseDates?.flatMap((course) =>
     course.Lectures.map((lecture) => ({
+      NameCourse: course.NameCourse,
       Day: lecture.Day,
       CourseTeacher: lecture.CourseTeacher,
       ClassRoom: lecture.ClassRoom,
@@ -34,6 +35,7 @@ export const configDataTimeTable = (data: timeTable): timeTableItem => {
       existingItem.Hours.push(...lecture.Hours);
     } else {
       acc.push({
+        NameCourse: lecture.NameCourse,
         Day: lecture.Day,
         CourseTeacher: lecture.CourseTeacher,
         ClassRoom: lecture.ClassRoom,
