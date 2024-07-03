@@ -19,6 +19,7 @@ import Background from "./Background";
 import CategoriesDay from "./CategoriesDay";
 import Day from "./Day";
 import ListItem from "./ListItem";
+import ListItemCourse from "./ListItemCourse";
 
 export {
   TabIcon,
@@ -43,4 +44,5 @@ export {
   CategoriesDay,
   Day,
   ListItem,
+  ListItemCourse,
 };
