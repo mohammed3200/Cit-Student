@@ -2,8 +2,10 @@ import { View, Text } from "react-native";
 import React from "react";
 import Day from "./Day";
 
-interface CategoriesDayProps {}
-
+interface CategoriesDayProps {
+  selectedDay: string;
+  onDayPress: (day: { code: string; name: string; isActive: boolean }) => void;
+}
 const Days = [
   {
     code: "س ب",
@@ -37,11 +39,16 @@ const Days = [
   },
 ].reverse();
 
-const CategoriesDay: React.FC<CategoriesDayProps> = ({}) => {
+const CategoriesDay: React.FC<CategoriesDayProps> = ({ selectedDay, onDayPress }) => {
   return (
     <View className="flex-row justify-between items-center px-2 mt-4">
       {Days.map((item, index) => (
-        <Day key={index.toString()} day={item} />
+        <Day
+          key={index.toString()}
+          day={item}
+          isSelected={item.code === selectedDay}
+          onPress={() => onDayPress(item)}
+        />
       ))}
     </View>
   );

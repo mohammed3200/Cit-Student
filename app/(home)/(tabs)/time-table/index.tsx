@@ -35,6 +35,12 @@ const TimeTable = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [Data, setData] = useState<timeTableItem>(); // useState is initialized with an empty array
   const { data, isLoading, error, refetch } = useFetch("/student/timetable");
+  const [selectedDay, setSelectedDay] = useState<string>('س ب');
+
+  const handleDayPress = useCallback((day: { code: string; name: string; isActive: boolean }) => {
+    setSelectedDay(day.code);
+    // Implement your logic to filter the courses based on the selected day
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -132,7 +138,7 @@ const TimeTable = () => {
               }}
               className="bg-primary"
             >
-              <CategoriesDay />
+              <CategoriesDay selectedDay={selectedDay} onDayPress={handleDayPress} />
 
               <ListOfCourses ref={ref}>
                 <View className="flex-1">
