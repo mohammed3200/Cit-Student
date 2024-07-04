@@ -8,7 +8,7 @@ import {
   AlertNotificationRoot,
   Toast,
 } from "react-native-alert-notification";
-import { Header } from "@/components";
+import { Accordion, Header } from "@/components";
 import Icons from "@/constants/Icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { Chase } from "react-native-animated-spinkit";
@@ -55,16 +55,23 @@ const Grades = () => {
               <FlatList
                 data={Data}
                 renderItem={({ item, index }) => (
-                  <View></View>
+                  <View>
+                    <Accordion
+                      header={{
+                        SemesterName: item.SemesterName,
+                        SemesterNumber: item.SemesterNumber,
+                      }}
+                      Courses={item.Courses}
+                      key={index.toString()}
+                    />
+                  </View>
                 )}
                 keyExtractor={(_, index) => index.toString()}
                 contentContainerStyle={{
-                  borderTopLeftRadius:55,
-                  
+                  borderTopLeftRadius: 55,
                 }}
                 style={{
-                  borderTopLeftRadius:55,
-                  
+                  borderTopLeftRadius: 55,
                 }}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}

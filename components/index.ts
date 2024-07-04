@@ -20,6 +20,7 @@ import CategoriesDay from "./CategoriesDay";
 import Day from "./Day";
 import ListItem from "./ListItem";
 import ListItemCourse from "./ListItemCourse";
+import Accordion from "./Accordion";
 
 export {
   TabIcon,
@@ -45,4 +46,5 @@ export {
   Day,
   ListItem,
   ListItemCourse,
+  Accordion,
 };
