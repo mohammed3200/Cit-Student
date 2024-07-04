@@ -106,6 +106,7 @@ const Ads = () => {
     // >
     <AlertNotificationRoot>
       <CartContainer>
+
         <View className="bg-Bg">
           <Header
             title="الاعلانات"
@@ -121,7 +122,9 @@ const Ads = () => {
             }}
           />
         </View>
+
         <View className="flex-1 py-4">
+
           <ScrollView
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -169,6 +172,7 @@ const Ads = () => {
               <Path d={d} fill={"#13163e"} />
             </Svg>
           </View>
+
         </View>
       </CartContainer>
     </AlertNotificationRoot>

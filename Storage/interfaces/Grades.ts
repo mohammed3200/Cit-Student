@@ -1,10 +1,10 @@
 export interface GradesData {
   SemesterName: string;
   SemesterNumber: number;
-  Courses: Course[];
+  Courses: CourseG[];
 }
 
-interface Course {
+export interface CourseG {
   Code: string;
   Title: string;
   CourseUnits: number;
