@@ -12,6 +12,7 @@ import {
   Toast,
 } from "react-native-alert-notification";
 import { router } from "expo-router";
+import { Chase } from "react-native-animated-spinkit";
 
 const CoursesPage = () => {
   const navigation = useNavigation();
@@ -34,35 +35,41 @@ const CoursesPage = () => {
   }, [isLoading, data, error]);
 
   return (
-    <View className="flex-1">
-      <Header
-        title="المقررات الدراسية"
-        left={{
-          icon: Icons.Dot,
-          onPress: () => navigation.dispatch(DrawerActions.openDrawer()),
-        }}
-        dark
-      />
-      {Data && Data?.length > 0 ? (
-        <FlatList
-          data={Data}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingTop: 40 }}
-          onViewableItemsChanged={({ viewableItems: vItems }) => {
-            viewableItems.value = vItems;
+    <AlertNotificationRoot>
+      <View className="flex-1">
+        <Header
+          title="المقررات الدراسية"
+          left={{
+            icon: Icons.Dot,
+            onPress: () => navigation.dispatch(DrawerActions.openDrawer()),
           }}
-          renderItem={({ item, index }) => {
-            return (
-              <ListItemCourse
-                viewableItems={viewableItems}
-                item={item}
-                key={index.toString()}
-              />
-            );
-          }}
+          dark
         />
-      ) : null}
-    </View>
+        {Data && Data?.length > 0 ? (
+          <FlatList
+            data={Data}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingTop: 40 }}
+            onViewableItemsChanged={({ viewableItems: vItems }) => {
+              viewableItems.value = vItems;
+            }}
+            renderItem={({ item, index }) => {
+              return (
+                <ListItemCourse
+                  viewableItems={viewableItems}
+                  item={item}
+                  key={index.toString()}
+                />
+              );
+            }}
+          />
+        ) : (
+          <View className="flex-1 w-full h-full items-center justify-center">
+            <Chase size={100} color="#333333" />
+          </View>
+        )}
+      </View>
+    </AlertNotificationRoot>
   );
 };
 
