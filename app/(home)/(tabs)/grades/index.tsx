@@ -20,7 +20,7 @@ const Grades = () => {
 
   useEffect(() => {
     if (data) {
-      setData(data);
+      setData(data[0]);
     } else if (!isLoading && !data && error) {
       // If there is an error, show a message to the user
       Toast.show({
