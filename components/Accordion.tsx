@@ -39,19 +39,18 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
   });
   return (
     <View className="m-4 p-3 bg-lightGray rounded-lg">
-
-      <TouchableWithoutFeedback onPress={toggleAccordion}
-      className="flex-row items-center justify-between px-2"
-      >
-        <View className="flex-row justify-between">
-          <View>
-            <Text className="font-DNNextLT text-xl text-right text-black-100 text-wrap">
-              {header.SemesterName}
+      <TouchableWithoutFeedback onPress={toggleAccordion}>
+        <View className="flex-row-reverse items-center justify-between px-2">
+          <View className="flex-col justify-between">
+            <View>
+              <Text className="font-DNNextLT text-xl text-right text-black-100 text-wrap">
+                {header.SemesterName}
+              </Text>
+            </View>
+            <Text className="font-DNNextLT text-sm text-right text-black-200 text-wrap">
+              رقم الفصل الدراسي : {header.SemesterNumber}
             </Text>
           </View>
-          <Text className="font-DNNextLT text-base text-right text-black-200 text-wrap">
-            {header.SemesterNumber}
-          </Text>
           <Image
             source={opened ? icons.arrowUp : icons.arrowDown}
             className="w-8 h-8"
@@ -60,29 +59,36 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
         </View>
       </TouchableWithoutFeedback>
 
-
       <Animated.View
         style={{ height: heightAnimationInterpolation }}
+        className="flex-1"
       >
         {Courses.map((item, index) => (
-          <View className="flex-row justify-between items-center px-2" key={index.toString()}>
-            
-            <View className="w-12 flex-col">
+          <View
+            className="flex-row justify-between items-center px-2"
+            key={index.toString()}
+          >
+            <View>
+
               <Text className="font-DNNextLT text-right text-lg text-wrap text-black-100">
                 {item.Title}
               </Text>
+
               <Text className="font-DNNextLT text-right text-base text-wrap text-black-200">
-                {item.Code} {" "}رقم الفصل 
+                {item.Code} رقم الفصل
               </Text>
+
             </View>
 
             <Text className="font-DNNextLT text-right text-base text-wrap text-black-100">
               {item.CourseUnits}
             </Text>
+
             <Text className="font-DNNextLT text-right text-base text-wrap text-black-100">
               {item.ScheduledMark}
             </Text>
-            {/* {item?.IsCompleted ? (
+{/* 
+            {item?.IsCompleted ? (
               <View>
                 <View className="w-8 h-8 rounded-full justify-center items-center">
                   <Image
@@ -111,7 +117,6 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
             )} */}
           </View>
         ))}
-
       </Animated.View>
     </View>
   );
