@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { CourseG } from "@/Storage";
 import { Image } from "expo-image";
 import { icons } from "@/constants";
-import Icons from "@/constants/Icons";
 
 interface AccordionProps {
   header: {
@@ -35,8 +34,9 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
 
   const heightAnimationInterpolation = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, (Courses.length / 2.6) * 10],
+    outputRange: [0, Courses.length ** 2 * 18.5],
   });
+
   return (
     <View className="m-4 p-3 bg-lightGray rounded-lg">
       <TouchableWithoutFeedback onPress={toggleAccordion}>
@@ -61,23 +61,21 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
 
       <Animated.View
         style={{ height: heightAnimationInterpolation }}
-        className="flex-1"
+        className='py-2 my-1'
       >
         {Courses.map((item, index) => (
           <View
-            className="flex-row justify-between items-center px-2"
+            className="flex-row-reverse justify-between items-center py-2"
             key={index.toString()}
           >
-            <View>
-
+            <View className="h-fit w-28">
               <Text className="font-DNNextLT text-right text-lg text-wrap text-black-100">
                 {item.Title}
               </Text>
 
               <Text className="font-DNNextLT text-right text-base text-wrap text-black-200">
-                {item.Code} رقم الفصل
+                {item.Code}
               </Text>
-
             </View>
 
             <Text className="font-DNNextLT text-right text-base text-wrap text-black-100">
@@ -87,12 +85,11 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
             <Text className="font-DNNextLT text-right text-base text-wrap text-black-100">
               {item.ScheduledMark}
             </Text>
-{/* 
             {item?.IsCompleted ? (
-              <View>
+              <View className="flex-col py-1">
                 <View className="w-8 h-8 rounded-full justify-center items-center">
                   <Image
-                    source={Icons.check}
+                    source={icons.check}
                     className="bg-primary h-6 w-6 rounded-full"
                     tintColor={"#26b1a4"}
                   />
@@ -105,7 +102,7 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
               <View>
                 <View className="w-8 h-8 rounded-full justify-center items-center">
                   <Image
-                    source={Icons.crossCircle}
+                    source={icons.crossCircle}
                     className="bg-primary h-6 w-6 rounded-full"
                     tintColor={"#f70e0d"}
                   />
@@ -114,7 +111,7 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
                   غير منجز
                 </Text>
               </View>
-            )} */}
+            )}
           </View>
         ))}
       </Animated.View>

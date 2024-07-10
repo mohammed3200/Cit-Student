@@ -34,7 +34,7 @@ const ListItemCourse: React.FC<ListItemCourseProps> = React.memo(
 
     return (
       <Animated.View
-        className="h-20 w-[90%] self-center rounded-lg my-2"
+        className="h-fit w-[90%] self-center"
         style={[
           {
             // backgroundColor: "#78CAD2",
@@ -43,7 +43,7 @@ const ListItemCourse: React.FC<ListItemCourseProps> = React.memo(
         ]}
       >
         <View className="flex-row-reverse items-center justify-between px-2">
-          <View className="w-24">
+          <View className="w-28 h-fit">
             <Text className="font-DNNextLT text-right text-lg text-black-100 text-wrap">
               {item?.Title}
             </Text>
@@ -52,12 +52,14 @@ const ListItemCourse: React.FC<ListItemCourseProps> = React.memo(
             </Text>
           </View>
 
-          {item?.Prerequisites && (
+          {item?.Prerequisites ? (
             <View>
               <Text className="font-DNNextLT text-black-100 text-base text-wrap">
                 {item?.Prerequisites}
               </Text>
             </View>
+          ) : (
+            <View />
           )}
 
           <Text className="font-DNNextLT text-black-100 text-base">

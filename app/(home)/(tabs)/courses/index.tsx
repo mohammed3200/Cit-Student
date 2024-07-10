@@ -49,6 +49,7 @@ const CoursesPage = () => {
           <FlatList
             data={Data}
             showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingTop: 40 }}
             onViewableItemsChanged={({ viewableItems: vItems }) => {
               viewableItems.value = vItems;

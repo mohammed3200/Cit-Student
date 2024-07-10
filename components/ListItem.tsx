@@ -38,7 +38,7 @@ const ListItem: React.FC<ListItemProps> = React.memo(
           ]
         }
       >
-        <View className="flex-row-reverse h-fit w-[90%] rounded-lg self-center justify-between px-2 py-1">
+        <View className="flex-row-reverse h-fit w-full items-center justify-between">
           <View className="justify-self-end">
             <Text>{item?.Hours[0]?.TimeFromTo.split("-")[1]}</Text>
           </View>
