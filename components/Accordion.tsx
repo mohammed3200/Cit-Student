@@ -34,7 +34,7 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
 
   const heightAnimationInterpolation = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, Courses.length ** 2 * 18.5],
+    outputRange: [0, (Courses.length ** 2 / 2.6) * 10],
   });
 
   return (
@@ -61,7 +61,7 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
 
       <Animated.View
         style={{ height: heightAnimationInterpolation }}
-        className='py-2 my-1'
+        className="py-2 my-1"
       >
         {Courses.map((item, index) => (
           <View
