@@ -8,8 +8,8 @@ interface AuthProps {
     RegNo: string,
     password: string,
     pushToken?: string
-  ) => Promise<any>;
-  onLoginByQrCode?: (QrCode: string, pushToken?: string) => Promise<any>; 
+  ) => Promise<any> | { error: boolean, msg: string };
+  onLoginByQrCode?: (QrCode: string, pushToken?: string) => Promise<any> | { error: boolean, msg: string }; 
   onLogout?: () => Promise<any>;
 }
 
@@ -69,9 +69,7 @@ export const AuthProvider = ({ children }: any) => {
 
       return result;
     } catch (err) {
-      console.log({ error: true, msg: err });
-
-      return { error: true, msg: (err as any).response?.data.statusCode };
+      throw { error: true, msg: (err as any).response?.data.statusCode };
     }
   };
   const loginByQrCode = async (QrCode: string, pushToken?: string) => {
@@ -99,9 +97,7 @@ export const AuthProvider = ({ children }: any) => {
   
       return result;
     } catch (err) {
-      console.log({ error: true, msg: err });
-  
-      return { error: true, msg: (err as any).response?.data.statusCode };
+      throw { error: true, msg: (err as any).response?.data.statusCode };
     }
   };
   
