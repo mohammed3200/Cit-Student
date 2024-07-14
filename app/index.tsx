@@ -18,7 +18,7 @@ const Page = () => {
     <>
       <View
         className="flex-1 w-full justify-center 
-        items-center h-full"
+        items-center h-full py-5"
       >
         <Image
           source={Images.logo}
@@ -31,8 +31,8 @@ const Page = () => {
         <Link href="/Onboarding">
             <Text>Go Onboarding</Text>
           </Link>
-          <Link href="/(home)/(tabs)/time-table">
-            <Text>Go home</Text>
+          <Link href="/(home)/(tabs)/grades">
+            <Text>Go grades</Text>
           </Link>
       </View>
     </>
