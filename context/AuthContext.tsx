@@ -54,8 +54,6 @@ export const AuthProvider = ({ children }: any) => {
         pushToken: pushToken,
       });
 
-      console.log("🔒 ~ file: AuthContext.tsx:34 ~ login ~ result:", result);
-
       setAuthState({
         token: result.data.data.access_token,
         authenticated: true,
@@ -72,17 +70,13 @@ export const AuthProvider = ({ children }: any) => {
       throw { error: true, msg: (err as any).response?.data.statusCode };
     }
   };
+  
   const loginByQrCode = async (QrCode: string, pushToken?: string) => {
     try {
       const result = await axios.post(`${API_URL}/auth/signinQrCode`, {
         QrCode: QrCode,
         pushToken: pushToken,
       });
-  
-      console.log(
-        "🔒 ~ file: AuthContext.tsx:78 ~ loginByQrCode ~ result:",
-        result
-      );
   
       setAuthState({
         token: result.data.data.access_token,

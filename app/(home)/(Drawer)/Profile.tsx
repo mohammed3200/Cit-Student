@@ -189,7 +189,7 @@ const Profile = ({ ...props }) => {
         <View
           style={{
             width: DRAWER_WIDTH,
-            height: height * 0.61,
+            height: height * 0.45,
           }}
           className="bg-primary overflow-hidden"
         >

@@ -34,7 +34,7 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
 
   const heightAnimationInterpolation = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, (Courses.length ** 2 / 2.6) * 10],
+    outputRange: [0, ((Courses.length + 2) ** 2) * 10],
   });
 
   return (
@@ -65,7 +65,7 @@ const Accordion: React.FC<AccordionProps> = ({ header, Courses }) => {
       >
         {Courses.map((item, index) => (
           <View
-            className="flex-row-reverse justify-between items-center py-2"
+            className="flex-row-reverse justify-between items-center py-2 h-fit"
             key={index.toString()}
           >
             <View className="h-fit w-28">

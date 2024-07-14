@@ -38,17 +38,18 @@ const ListItem: React.FC<ListItemProps> = React.memo(
           ]
         }
       >
-        <View className="flex-row-reverse h-fit w-full items-center justify-between">
+        <View className="flex-row-reverse h-fit w-full items-center justify-between px-2 mx-2">
+
           <View className="justify-self-end">
             <Text>{item?.Hours[0]?.TimeFromTo.split("-")[1]}</Text>
           </View>
 
           <View
-            className="h-2 rounded-full w-[80%]"
+            className="h-2 rounded-full w-[70%]"
             style={{
-              backgroundColor: "#4ADAE2",
-              borderWidth: 2,
-              borderColor: "#78CAD2",
+              backgroundColor: "#78CAD2",
+              borderWidth: 1,
+              borderColor: "#78CA92",
             }}
           />
           <View className="justify-self-start">
