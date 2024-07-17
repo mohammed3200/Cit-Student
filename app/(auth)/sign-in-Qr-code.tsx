@@ -15,7 +15,6 @@ import { useAuth } from "@/context";
 import { usePushNotifications } from "@/hooks";
 import {
   ALERT_TYPE,
-  Dialog,
   AlertNotificationRoot,
   Toast,
 } from "react-native-alert-notification";
@@ -104,11 +103,12 @@ const SigInQrCode = () => {
               validator={QrCodeStringValidator}
               onValidQrCode={setQrCode}
             />
+            
             <CustomButton
               title="سجل الدخول"
               variant={qrCode ? "primary" : "default"}
               isLoading={isLoading}
-              containerStyle="w-full mt-4"
+              containerStyle="w-full mt-5"
               onPress={onSubmit}
             />
           </View>

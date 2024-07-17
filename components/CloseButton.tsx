@@ -18,9 +18,9 @@ const CloseButton: React.FC<CloseButtonProps> = ({ onPress }) => {
     >
       <Image
         source={icons.cross}
-        className="w-10 h-10 bg-Bg rounded-full"
+        className="w-10 h-10 bg-primary rounded-full"
         contentFit="contain"
-        tintColor={"#F0F0F5"}
+        tintColor={"#13163e"}
       />
     </TouchableOpacity>
   );

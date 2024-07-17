@@ -1,14 +1,18 @@
-import { View, Text, Button, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import Animated, {
-  Easing,
-  withTiming,
   useSharedValue,
   useAnimatedStyle,
+  ReduceMotion,
+  withSpring,
 } from "react-native-reanimated";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Image } from "expo-image";
 import { icons } from "@/constants";
+import {
+  ALERT_TYPE,
+  Toast,
+} from "react-native-alert-notification";
 
 interface QrCodeScannerProps {
   validator: (input: string) => boolean;
@@ -40,7 +44,7 @@ const QrCodeScanner: React.FC<QrCodeScannerProps> = ({
 
   const handleBarCodeScanned = ({ data }: BarCodeScannerProps) => {
     setScanned(true);
-    validate(data); 
+    validate(data);
   };
 
   const validate = (qrCode: string) => {
@@ -61,11 +65,17 @@ const QrCodeScanner: React.FC<QrCodeScannerProps> = ({
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      moveAnimation.value = withTiming(
-        moveAnimation.value === 0 ? HeightScanner * 1.18 : 0,
+      moveAnimation.value = withSpring(
+        moveAnimation.value === 0 ? HeightScanner * 0.98 : 0,
+
         {
-          duration: 1400,
-          easing: Easing.inOut(Easing.ease),
+          duration: 1000,
+          dampingRatio: 2.3,
+          stiffness: 135,
+          overshootClamping: true,
+          restDisplacementThreshold: 0.01,
+          restSpeedThreshold: 2,
+          reduceMotion: ReduceMotion.System,
         }
       );
     }, 1000);
@@ -74,46 +84,52 @@ const QrCodeScanner: React.FC<QrCodeScannerProps> = ({
 
   if (!permission?.granted) {
     // Render some UI to request permission or indicate the lack of permissions
-    return <Text>Camera permission is required to use this feature.</Text>;
+    Toast.show({
+      type: ALERT_TYPE.WARNING,
+      title: "تنويه !!",
+      textBody:
+        "مطلوب إذن الكاميرا لاستخدام هذه الميزة.",
+    });
   }
 
   return (
-    <View
-      className="
-      justify-center items-center
-       border-Bg border-4 rounded-2xl"
-      style={{
-        height: HeightScanner,
-        width: HeightScanner,
-      }}
-    >
-      {!scanned && (
-        <Animated.View
-          style={[animatedStyles]}
-          className="
-        self-center w-full h-1
-         bg-secondary-100 rounded-full 
-         absolute left-0 top-0 z-10"
-        />
-      )}
-      <CameraView
-        barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
-        onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
-        className="w-full h-full"
-      />
-      {scanned && (
-        <TouchableOpacity
-          className="absolute place-self-center w-1/4 h-1/4"
-          onPress={() => setScanned(false)}
-        >
-          <Image
-            source={icons.rotate}
-            className="w-full h-full"
-            tintColor={"#ff6000"}
+      <View
+        className="
+      justify-center items-center"
+        style={{
+          height: HeightScanner,
+          width: HeightScanner,
+        }}
+      >
+        {!scanned && (
+          <Animated.View
+            style={[animatedStyles]}
+            className="w-[95%] h-1
+             bg-secondary-100 rounded-full 
+             absolute self-center top-1 z-10"
           />
-        </TouchableOpacity>
-      )}
-    </View>
+        )}
+        <View className="w-full h-full overflow-hidden rounded-xl border-4 border-Bg">
+          <CameraView
+            barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
+            onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+            className="w-full h-full"
+          />
+        </View>
+        {scanned && (
+          <TouchableOpacity
+            className="absolute place-self-center w-1/4 h-1/4"
+            onPress={() => setScanned(false)}
+          >
+            <Image
+              source={icons.rotate}
+              className="w-full h-full"
+              tintColor={"#ff6000"}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
+
   );
 };
 

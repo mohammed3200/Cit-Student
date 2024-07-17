@@ -16,12 +16,12 @@ const Welcome: React.FC<WelcomeProps> = () => {
         <View className="w-full justify-center items-center min-h-[85vh] px-4">
           <Image
             source={Images.logo}
-            className="w-28 h-28 rounded-full my-4"
+            className="w-32 h-32 rounded-full my-4"
             contentFit="cover"
           />
           <Image
             source={Images.undraw_welcoming}
-            className="max-w-[380px] h-[300px] w-full"
+            className="max-w-[340px] h-[260px] w-full"
             contentFit="contain"
           />
           <View className="relative mt-5">
@@ -48,14 +48,14 @@ const Welcome: React.FC<WelcomeProps> = () => {
             onPress={() => {
                 router.replace('/(auth)/sign-in')
             }}
-            containerStyle="w-full mt-7"
+            containerStyle="w-full mt-5"
           />
           <CustomButton
             title="تسجيل الدخول عبر رمز الاستجابة السريعة "
             onPress={() => {
                 router.replace('/(auth)/sign-in-Qr-code')
             }}
-            containerStyle="w-full mt-3 mb-5"
+            containerStyle="w-full mt-4 mb-3"
           />
         </View>
       </ScrollView>
