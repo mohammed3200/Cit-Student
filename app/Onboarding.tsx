@@ -85,11 +85,11 @@ const Onboarding: React.FC<OnboardingProp> = () => {
           ref={slidesRef}
         />
       </View>
-      <View className='flex-1 flex-col'>
-        <View className='absolute -top-48 right-10 left-12'>
+      <View className='flex-1 flex-col items-center'>
+        <View className=''>
           <Paginator data={slides} scrollX={scrollX} />
         </View>
-        <View className='mt-20 items-center'>
+        <View className=''>
           <NextButton
             label={last ? "هيا بنا نبدء" : "التالي"}
             variant={last ? "primary" : "default"}
