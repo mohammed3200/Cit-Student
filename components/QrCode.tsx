@@ -66,7 +66,7 @@ const QrCodeScanner: React.FC<QrCodeScannerProps> = ({
   useEffect(() => {
     const intervalId = setInterval(() => {
       moveAnimation.value = withSpring(
-        moveAnimation.value === 0 ? HeightScanner * 0.98 : 0,
+        moveAnimation.value === 0 ? HeightScanner * 0.96 : 0,
 
         {
           duration: 1000,
