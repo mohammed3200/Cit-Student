@@ -14,7 +14,7 @@ const CloseButton: React.FC<CloseButtonProps> = ({ onPress }) => {
       className="w-14 h-14
      rounded-full bg-primary
      justify-center items-center"
-      activeOpacity={0.5}
+      activeOpacity={0.3}
     >
       <Image
         source={icons.cross}
