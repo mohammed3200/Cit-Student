@@ -6,6 +6,7 @@ interface NextButtonProp {
   variant?: "default" | "primary" | "transparent";
   onPress: () => void;
   children?: React.ReactNode;
+  containerStyle?: string;
 }
 
 const NextButton: React.FC<NextButtonProp> = ({
@@ -13,6 +14,7 @@ const NextButton: React.FC<NextButtonProp> = ({
   variant = "default",
   onPress,
   children,
+  containerStyle,
 }) => {
   const backgroundColor =
     variant === "primary"
@@ -24,7 +26,11 @@ const NextButton: React.FC<NextButtonProp> = ({
   return (
     <TouchableOpacity
       style={{ backgroundColor }}
-      className="w-full h-auto py-6 justify-center items-center mx-24 rounded-full"
+      className={`
+        h-auto py-6 justify-center
+         items-center rounded-full
+         ${containerStyle}
+         `}
       onPress={onPress}
       activeOpacity={0.7}
     >
