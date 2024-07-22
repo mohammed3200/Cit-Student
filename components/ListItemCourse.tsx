@@ -4,11 +4,16 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
-import { Course } from "@/Storage";
 import { Image } from "expo-image";
-import { Images } from "@/constants";
-import Icons from "@/constants/Icons";
+import { icons } from "@/constants";
 
+export interface Course {
+  Title: string;
+  Code: string;
+  CourseUnits: number;
+  IsCompleted: boolean;
+  Prerequisites: null | string;
+}
 interface ListItemCourseProps {
   viewableItems: Animated.SharedValue<ViewToken[]>;
   item: Course | undefined | null;
@@ -65,31 +70,18 @@ const ListItemCourse: React.FC<ListItemCourseProps> = React.memo(
           <Text className="font-DNNextLT text-black-100 text-base">
             {item?.CourseUnits} وحدات
           </Text>
-          {item?.IsCompleted ? (
-            <View>
-              <View className="w-8 h-8 rounded-full justify-center items-center">
-                <Image
-                  source={Icons.check}
-                  className="bg-primary h-6 w-6"
-                  tintColor={"#26b1a4"}
-                />
-              </View>
-              <Text className="font-DNNextLT text-ms text-black-200">منجز</Text>
+          <View>
+            <View className="w-8 h-8 rounded-full justify-center items-center">
+              <Image
+                source={item?.IsCompleted ? icons.check : icons.crossCircle}
+                className="bg-primary h-6 w-6"
+                tintColor={item?.IsCompleted ? "#26b1a4" : "#f70e0d"}
+              />
             </View>
-          ) : (
-            <View>
-              <View className="w-8 h-8 rounded-full justify-center items-center">
-                <Image
-                  source={Icons.crossCircle}
-                  className="bg-primary h-6 w-6"
-                  tintColor={"#f70e0d"}
-                />
-              </View>
-              <Text className="font-DNNextLT text-sm text-black-200">
-                غير منجز
-              </Text>
-            </View>
-          )}
+            <Text className="font-DNNextLT text-ms text-black-200">
+              {item?.IsCompleted ? "منجز" : "غير منجز"}
+            </Text>
+          </View>
         </View>
         <View className="w-[85%] rounded-full h-1 bg-black-100 my-2 self-center" />
       </Animated.View>

@@ -21,7 +21,7 @@ const Grades = () => {
   useEffect(() => {
     if (data) {
       setData(data);
-    } else if (!isLoading && !data && error) {
+    } if (error) {
       // If there is an error, show a message to the user
       Toast.show({
         type: ALERT_TYPE.DANGER,

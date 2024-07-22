@@ -6,7 +6,7 @@ import {useRouter} from 'expo-router';
 export const useFetch = (endpoint: string) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<any>({});
+  const [data, setData] = useState<any | null>({});
   const {onLogout} = useAuth();
   const router = useRouter();
 
@@ -22,7 +22,6 @@ export const useFetch = (endpoint: string) => {
       ) {
         onLogout;
         setError(error.message);
-        router.replace('/logoIn');
       } else {
         setError('An unknown error occurred');
       }

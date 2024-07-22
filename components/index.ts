@@ -19,7 +19,7 @@ import Background from "./Background";
 import CategoriesDay from "./CategoriesDay";
 import Day from "./Day";
 import ListItem from "./ListItem";
-import ListItemCourse from "./ListItemCourse";
+import ListItemCourse,{Course} from "./ListItemCourse";
 import Accordion from "./Accordion";
 
 export {
@@ -46,5 +46,6 @@ export {
   Day,
   ListItem,
   ListItemCourse,
+  Course,
   Accordion,
 };

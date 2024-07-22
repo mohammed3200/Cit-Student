@@ -16,7 +16,6 @@ import { router, useLocalSearchParams } from "expo-router";
 
 import React, { useCallback, useEffect, useState } from "react";
 import {
-  Alert,
   Dimensions,
   RefreshControl,
   ScrollView,
@@ -44,7 +43,7 @@ const Ads = () => {
       setData(
         () => data.map((item: any) => configDataEvents(item)) as EventItem[]
       );
-    } else if (!isLoading && !data && error) {
+    } if (error) {
       // If there is an error, show a message to the user
       Toast.show({
         type: ALERT_TYPE.DANGER,

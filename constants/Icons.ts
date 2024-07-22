@@ -45,4 +45,5 @@ export default {
   arrow : require("@/assets/icons/angle-small-right.png"),
   arrowUp : require("@/assets/icons/angle-small-up.png"),
   arrowDown : require("@/assets/icons/angle-small-down.png"),
+  pen : require("@/assets/icons/pen.png"),
 };

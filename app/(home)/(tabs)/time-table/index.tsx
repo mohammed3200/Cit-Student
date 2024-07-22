@@ -2,7 +2,6 @@ import {
   View,
   Text,
   ScrollView,
-  RefreshControl,
   Dimensions,
   StyleSheet,
   FlatList,
@@ -17,6 +16,7 @@ import {
   LectureDaysItems,
   configDataTimeTable,
   timeTableItem,
+  CurrentCourseDateItem,
 } from "@/Storage";
 import { useFetch } from "@/hooks";
 import {
@@ -56,23 +56,28 @@ const TimeTable = () => {
     (day: { code: string; name: string; isActive: boolean }) => {
       setSelectedDay(day.code);
       setSelectedDayName(day.name);
-      setLecturesDay(Data?.LectureDays?.filter((item) => day.name === item.Day));
+      setLecturesDay(
+        Data?.LectureDays?.filter((item) => day.name === item.Day)
+      );
     },
-  
+
     [Data]
   );
 
   useEffect(() => {
     if (data) {
       setData(() => configDataTimeTable(data) as timeTableItem);
-    } else if (!isLoading && !data && error) {
+    }
+    if (error) {
       // If there is an error, show a message to the user
       Toast.show({
         type: ALERT_TYPE.DANGER,
         title: "خطاء",
         textBody: "يجب اعادة تسجيل الدخول",
       });
-      router.replace("/Welcome");
+      setTimeout(() => {
+        router.replace("/Welcome");
+      }, 1000);
     }
   }, [isLoading, data, error]);
 
@@ -98,9 +103,15 @@ const TimeTable = () => {
 
   useEffect(() => {
     if (Data) {
-      const sortedLectureDays = Data.LectureDays?.filter((item) => selectedDayName === item.Day)?.sort((a, b) => {
-        const [aStartTime, aEndTime] = a.Hours[0].TimeFromTo.split('-').map((time) => moment(time.trim(), 'h:mm'));
-        const [bStartTime, bEndTime] = b.Hours[0].TimeFromTo.split('-').map((time) => moment(time.trim(), 'h:mm'));
+      const sortedLectureDays = Data.LectureDays?.filter(
+        (item) => selectedDayName === item.Day
+      )?.sort((a, b) => {
+        const [aStartTime, aEndTime] = a.Hours[0].TimeFromTo.split("-").map(
+          (time) => moment(time.trim(), "h:mm")
+        );
+        const [bStartTime, bEndTime] = b.Hours[0].TimeFromTo.split("-").map(
+          (time) => moment(time.trim(), "h:mm")
+        );
         if (aStartTime.isBefore(bStartTime)) {
           return -1;
         } else if (aStartTime.isAfter(bStartTime)) {
@@ -118,7 +129,6 @@ const TimeTable = () => {
       setLecturesDay(sortedLectureDays);
     }
   }, [selectedDay, Data]);
-
 
   const onPressList = useCallback(() => {
     const isActive = ref?.current?.isActive();
@@ -191,7 +201,7 @@ const TimeTable = () => {
                 onViewableItemsChanged={({ viewableItems: vItems }) => {
                   viewableItems.value = vItems;
                 }}
-                renderItem={({ item,index }) => {
+                renderItem={({ item, index }) => {
                   return (
                     <ListItem
                       viewableItems={viewableItems}

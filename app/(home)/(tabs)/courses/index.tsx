@@ -1,10 +1,9 @@
-import { View, Text, ViewToken, FlatList } from "react-native";
+import { View, ViewToken, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Header, ListItemCourse } from "@/components";
-import Icons from "@/constants/Icons";
+import { Header, ListItemCourse, Course } from "@/components";
+import { icons } from "@/constants";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { useFetch } from "@/hooks";
-import { Course, Courses } from "@/Storage";
 import { useSharedValue } from "react-native-reanimated";
 import {
   ALERT_TYPE,
@@ -13,6 +12,7 @@ import {
 } from "react-native-alert-notification";
 import { router } from "expo-router";
 import { Chase } from "react-native-animated-spinkit";
+import { CoursesItem } from "@/Storage";
 
 const CoursesPage = () => {
   const navigation = useNavigation();
@@ -22,8 +22,8 @@ const CoursesPage = () => {
 
   useEffect(() => {
     if (data) {
-      setData(() => data?.Courses);
-    } else if (!isLoading && !data && error) {
+      setData(() => data?.Courses as Course[]);
+    } if (error) {
       // If there is an error, show a message to the user
       Toast.show({
         type: ALERT_TYPE.DANGER,
@@ -40,7 +40,7 @@ const CoursesPage = () => {
         <Header
           title="المقررات الدراسية"
           left={{
-            icon: Icons.Dot,
+            icon: icons.Dot,
             onPress: () => navigation.dispatch(DrawerActions.openDrawer()),
           }}
           dark

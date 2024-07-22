@@ -11,3 +11,11 @@ export interface Course {
   IsCompleted: boolean;
   Prerequisites: null | string;
 }
+
+export interface CoursesItem {
+  Title: string;
+  Code: string;
+  CourseUnits: number;
+  StatusCourse: "Success" | "Unfinished" | "Lessoning";
+  Prerequisites: null | string;
+}
